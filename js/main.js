@@ -30,22 +30,15 @@ for (i = 0;i < suma.length; i++) {
 	}
 }
 
-var luciernagas = generarLuciernagas(10,unicos);
+var luciernagas = generarLuciernagas(2,unicos);
 	
 	for(x in luciernagas){
 		console.log(luciernagas[x])
 		console.log(error(op1,op2,res,luciernagas[x]))
+		//console.log(distanciaManhattan(luciernagas[x],luciernagas[x+1]))
 	}
+console.log(distanciaManhattan(luciernagas[0],luciernagas[1]));
 
-var luc1 = {};
-luc1["S"] = 9;
-luc1["E"] = 5;
-luc1["N"] = 6;
-luc1["D"] = 7;
-luc1["R"] = 8;
-luc1["M"] = 1;
-luc1["O"] = 0;
-luc1["Y"] = 2;
 
 function generarLuciernagas(cant,unicos){
 	var luciernagas = [];
@@ -94,4 +87,13 @@ function error(op1,op2,res,luc){
 		error+=Math.abs(h);
 	};
 	return error;
+}
+
+
+function distanciaManhattan(luc1,luc2){
+	var distancia = 0;
+	for (x in luc1){
+		distancia+=Math.abs(luc1[x]-luc2[x]);
+	}
+	return distancia;
 }
