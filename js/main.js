@@ -14,6 +14,10 @@ luc1["O"] = 6;
 luc1["Y"] = 7;
 //console.log(luc1["S"]);
 */
+var MAX_GEN = 1;
+
+var initialPopulation = 10;
+
 
 var operador1 = "SEND";
 var operador2 = "MORE";
@@ -22,29 +26,22 @@ var resultado = "MONEY";
 var op1 = operador1.split("").reverse();
 var op2 = operador2.split("").reverse();
 var res = resultado.split("").reverse();
-var suma =operador1  + operador2 + resultado;
+
+var suma = operador1  + operador2 + resultado;
+
 var unicos = [];
+
 for (i = 0;i < suma.length; i++) {
 	if(unicos.indexOf(suma[i])==-1){
 		unicos.push(suma[i]);
 	}
 }
 
-var luciernagas = generarLuciernagas(2,unicos);
-	
-	for(x in luciernagas){
-		console.log(luciernagas[x])
-		console.log(error(op1,op2,res,luciernagas[x]))
-		//console.log(distanciaManhattan(luciernagas[x],luciernagas[x+1]))
-	}
-console.log(distanciaManhattan(luciernagas[0],luciernagas[1]));
-
-
-function generarLuciernagas(cant,unicos){
+function generarLuciernagas(){
 	var luciernagas = [];
-	for(j=0;j<cant;j++){
+	for(j=0;j<initialPopulation;j++){
 		var luc = {};
-		for(i = 0; i<unicos.length;i++){
+		for(i = 0; i < unicos.length;i++){
 			var nro = Math.round(Math.random()*9);
 			while(exists(luc,nro)){
 				nro = Math.round(Math.random()*9);
@@ -66,7 +63,7 @@ function exists(luciernaga, nro) {
     return false;
 }
 
-function error(op1,op2,res,luc){
+function error(luc){
 
 	var acarreo=0;
 	var h=0;
@@ -96,4 +93,27 @@ function distanciaManhattan(luc1,luc2){
 		distancia+=Math.abs(luc1[x]-luc2[x]);
 	}
 	return distancia;
+}
+
+
+function FA(){
+
+var luciernagas = generarLuciernagas();
+
+var i = 0;
+
+while (i < MAX_GEN) {
+	for (var i = 0; i < initialPopulation; i++) {
+		for (var j = 0; j < initialPopulation; j++) {			
+			if (error(luciernagas[i])>error(luciernagas[j])){
+					//i se tiene que mover hacia j
+					console.log(distanciaManhattan(luciernagas[i],luciernagas[j]))
+			}
+
+		};
+	};
+}
+
+	
+
 }
