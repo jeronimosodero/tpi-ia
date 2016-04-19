@@ -1,19 +1,4 @@
-/*var luciernaga1 = [{letra:"S",nro:0},{letra:"E",nro:1},{letra:"N",nro:2},{letra:"D",nro:3},{letra:"R",nro:4},{letra:"M",nro:5},{letra:"O",nro:6},{letra:"Y",nro:7}];
-
-console.log(luciernaga1[0].nro);
-*/
-
-/*var luc1 = {};
-luc1["S"] = 0;
-luc1["E"] = 1;
-luc1["N"] = 2;
-luc1["D"] = 3;
-luc1["R"] = 4;
-luc1["M"] = 5;
-luc1["O"] = 6;
-luc1["Y"] = 7;
-//console.log(luc1["S"]);
-*/
+//esta todo mal
 var MAX_GEN = 1;
 
 var initialPopulation = 10;
