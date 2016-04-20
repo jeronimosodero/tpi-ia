@@ -3,6 +3,7 @@ var MAX_GEN = 1;
 
 var initialPopulation = 10;
 
+var nameLuciernagas = []
 
 var operador1 = "SEND";
 var operador2 = "MORE";
@@ -34,6 +35,7 @@ function generarLuciernagas(){
 			luc[unicos[i]] = nro;
 		}
 		luciernagas.push(luc);
+		nameLuciernagas.push(chance.first());
 	}
 	return luciernagas;
 }
@@ -68,7 +70,7 @@ function error(luc){
 		}
 		error+=Math.abs(h);
 	};
-	return error;
+	return  maxError() - error;
 }
 
 
@@ -81,6 +83,10 @@ function distanciaManhattan(luc1,luc2){
 }
 
 
+function maxError(){
+	return resultado.length *9
+}
+
 function FA(){
 
 var luciernagas = generarLuciernagas();
@@ -90,7 +96,7 @@ var i = 0;
 while (i < MAX_GEN) {
 	for (var i = 0; i < initialPopulation; i++) {
 		for (var j = 0; j < initialPopulation; j++) {			
-			if (error(luciernagas[i])>error(luciernagas[j])){
+			if (error(luciernagas[i])<error(luciernagas[j])){
 					//i se tiene que mover hacia j
 					console.log(distanciaManhattan(luciernagas[i],luciernagas[j]))
 			}
@@ -102,3 +108,10 @@ while (i < MAX_GEN) {
 	
 
 }
+
+
+
+
+
+
+

@@ -6,6 +6,10 @@
  * Made By MaterializeCSS.com
  */
 
+ sub {
+ 	color: #9E9E9E;
+ }
+
 .icon-block {
   padding: 0 15px;
 }

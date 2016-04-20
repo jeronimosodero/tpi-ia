@@ -7,9 +7,14 @@
   <title>Trabajo Practico Integrador Inteligencia Artificial</title>
 
   <!-- CSS  -->
+<!--   <link href="css/icon.css" rel="stylesheet">
+  <link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/> -->
+
   <link href="css/icon.css" rel="stylesheet">
   <link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
 </head>
 <body>
   <nav class="light-blue lighten-1" role="navigation">
@@ -25,11 +30,15 @@
     </div>
   </nav>
 
+<div>
 <div class="container">
+  
   <br>
   <H5>Cargar valores</H5>
    <form class="col s12">
+
 <div class="row">
+  
         <div class="input-field col s3">
           <input id="operador1" type="text" class="validate" style='text-transform:uppercase'>
           <label for="operador1">Primer Operador</label>
@@ -44,11 +53,40 @@
           <input id="resultado" type="text" class="validate" style='text-transform:uppercase'>
           <label for="resultado">Resultado</label>
         </div>
-         <!--  <i style="padding-top: 24px" class="material-icons waves-effect waves-light col s1">send</i> -->
+         
            <button style="margin-top: 20px"class="btn waves-effect waves-light col s1" type="submit" name="action"><i class="material-icons">send</i>
-  </button>    
+          </button>
+        </div> 
+         
     </form>
 </div>
+</div>
+
+
+<div class="container">
+    <div class="row" id="fireflys">
+     <!--  <div class="col s3" >     
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <img src="css/firefly.png" style="width:20px;height:20px; color: white">
+            <span class="card-title">Luciernaga</span>
+            <br>
+            <p style="text-align: right;"> 9<sub> S</sub> 4<sub> E</sub> 6<sub> N</sub> 2<sub> D</sub></p>
+            <span style="float: left;">+</span>
+            <p style="text-align: right;"> 9<sub> S</sub> 4<sub> E</sub> 6<sub> N</sub> 2<sub> D</sub></p>
+            <div class="divider"></div>
+            <p style="text-align: right;"> 9<sub> S</sub> 4<sub> E</sub> 6<sub> N</sub> 2<sub> D</sub></p>
+          </div>
+          <div class="divider"></div>
+          <div class="card-content white-text" style="padding-top: 7px; padding-bottom: 5px;">
+            <p><i class="tiny material-icons">brightness_5</i> </p>
+          </div>
+        </div> -->
+      </div>
+
+      </div>
+    </div>
+
 
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
@@ -105,19 +143,18 @@
     <div class="section">
 
     </div>
-  </div>
+  </div> 
 
   <footer class="page-footer orange">
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
-          <h5 class="white-text">Sinopsis del Trabajo</h5>
+
+          <h5 class="white-text"><i class="tiny material-icons">note</i>  Resumen del trabajo</h5>
           <p class="grey-text text-lighten-4">El presente trabajo tiene la intención de aplicar el algoritmo de enjambre "Firefly" para la resolución de problemas de Criptoaritmetica.</p>
-
-
         </div>
         <div class="col l3 s12">
-          <h5 class="white-text">Integrantes</h5>
+          <h5 class="white-text"><i class="tiny material-icons">group</i>  Integrantes</h5>
           <ul>
             <li><a class="white-text">Sodero, Jerónimo</a></li>
             <li><a class="white-text">Wajnman, Matías</a></li>
@@ -125,24 +162,24 @@
           </ul>
         </div>
         <div class="col l3 s12">
-          <h5 class="white-text">Profesor</h5>
+          <h5 class="white-text"><i class="tiny material-icons">person</i>  Profesor</h5>
           <ul>
             <li><a class="white-text">Dr. Karanic, Marcelo</a></li>
           </ul>
         </div>
       </div>
         <div class="row">
-          <div class="col l6 s12">
-            <h5 class="white-text">Entidad</h5>
+          <div class="col l4 s12">
+            <h5 class="white-text"><i class="tiny material-icons">school</i>  Entidad</h5>
             <p class="white-text">Univesidad Teconológica Nacional</p>
             <p class="white-text">Facultad Regional Resistencia</p>
           </div>
           <div class="col l3 s12">
-            <h5 class="white-text">Catedra</h5>
+            <h5 class="white-text"><i class="tiny material-icons">book</i>  Catedra</h5>
             <p class="white-text">Inteligencia Artificial</p>
           </div>
-          <div class="col l3 s12">
-            <h5 class="white-text">Carrera</h5>
+          <div class="col l5 s12">
+            <h5 class="white-text"><i class="tiny material-icons">computer</i>  Carrera</h5>
             <p class="white-text">Ingeniería en Sistemas de Información</p>
           </div>
         </div>
@@ -154,14 +191,17 @@
       Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
       </div>
     </div>
-  </footer>
+  </footer> 
 
+ 
 
   <!--  Scripts-->
   <script src="js/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/html.js"></script>
+  <script src="js/chance.min.js"></script>
 
   </body>
 </html>
