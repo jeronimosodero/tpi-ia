@@ -3,19 +3,31 @@ var MAX_GEN = 1;
 
 var initialPopulation = 10;
 
-var nameLuciernagas = []
+var nameLuciernagas = [];
 
-var operador1 = "SEND";
-var operador2 = "MORE";
-var resultado = "MONEY";
+var operador1;
+var operador2;
+var resultado;
 
-var op1 = operador1.split("").reverse();
-var op2 = operador2.split("").reverse();
-var res = resultado.split("").reverse();
+var op1;
+var op2;
+var res;
 
-var suma = operador1  + operador2 + resultado;
+
+function run(){
+if (checkInput()) mostrarLuciernagas(generarLuciernagas())
+
+}
+
+function checkInput(){
+
+leerInput()
+
+var max;
 
 var unicos = [];
+var suma = operador1 + operador2 + resultado;
+
 
 for (i = 0;i < suma.length; i++) {
 	if(unicos.indexOf(suma[i])==-1){
@@ -23,7 +35,94 @@ for (i = 0;i < suma.length; i++) {
 	}
 }
 
+
+
+if (unicos.length > 10){
+	Materialize.toast('Existen mas de 10 caracteres en el problema.', 4000);
+	return false;
+}
+
+for (var i = 0; i < unicos.length; i++) {
+	if (isNaN(unicos[i]) == false) {
+		Materialize.toast('Los operadores no puede contener digitos.', 4000);
+	return false;
+	}
+};
+
+
+if (operador1.length > operador2.length) max = operador1
+else max = operador2;
+
+
+if (max.length > resultado.length){
+	Materialize.toast('El resultado no tiene los suficientes caracteres', 4000);
+	return false;
+}
+
+if (resultado.length > max.length+1){
+	Materialize.toast('El resultado es muy largo', 4000);
+	return false;
+}
+
+if (resultado.length == 0){
+	Materialize.toast('El resultado esta vacío', 4000);
+	return false;
+}
+
+if (operador1.length == 0){
+	Materialize.toast('El primer operador es vacío', 4000);
+	return false;
+}
+
+if (operador2.length == 0){
+	Materialize.toast('El segundo operador es vacío', 4000);
+	return false;
+}
+
+return true;
+}
+
+
+
+function leerInput(){
+operador1 = "";
+operador2 = "";
+resultado = "";
+operador1 = document.getElementById("operador1").value.trim().toUpperCase();
+operador2 = document.getElementById("operador2").value.trim().toUpperCase();
+resultado = document.getElementById("resultado").value.trim().toUpperCase();
+
+}
+
+
+function splitReverse(){
+op1 = operador1.split("").reverse();
+op2 = operador2.split("").reverse();
+res = resultado.split("").reverse();
+}
+
+function split(){
+op1 = operador1.split("");
+op2 = operador2.split("");
+res = resultado.split("");
+}
+
+
 function generarLuciernagas(){
+
+	leerInput();
+
+	var unicos = [];
+	var suma = operador1 + operador2 + resultado;
+
+
+for (i = 0;i < suma.length; i++) {
+	if(unicos.indexOf(suma[i])==-1){
+		unicos.push(suma[i]);
+	}
+}
+
+
 	var luciernagas = [];
 	for(j=0;j<initialPopulation;j++){
 		var luc = {};
@@ -51,7 +150,7 @@ function exists(luciernaga, nro) {
 }
 
 function error(luc){
-
+	splitReverse();
 	var acarreo=0;
 	var h=0;
 	var error=0;

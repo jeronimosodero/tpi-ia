@@ -2,12 +2,11 @@
 
 function mostrarLuciernagas(luciernagas){
 
-var op1 = operador1.split("");
-var op2 = operador2.split("");
-var res = resultado.split("");
+leerInput();
+
 
 for(var i=0; i < luciernagas.length; i++){
-
+split();
 var textop1 = '<p style="text-align: right;"> '
 var textop2 = '<p style="text-align: right;"> '
 var textres = '<p style="text-align: right;"> '
