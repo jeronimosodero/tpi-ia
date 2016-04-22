@@ -6,6 +6,21 @@
  * Made By MaterializeCSS.com
  */
 
+input {
+	border-bottom: 1px solid white
+}
+
+   .input-field label {
+     color: white;
+         
+   }
+
+   .input-field input[type=text]:focus + label {
+     color: white;
+   }
+
+ 
+
  sub {
  	color: #9E9E9E;
  }

@@ -23,6 +23,8 @@ function checkInput(){
 
 leerInput()
 
+
+
 var max;
 
 var unicos = [];
@@ -35,6 +37,10 @@ for (i = 0;i < suma.length; i++) {
 	}
 }
 
+if (operador1 == "COMO" && operador2 == "HACES" && resultado == "ESTO"){
+		Materialize.toast('q se yo no soy 100tifiko', 4000);
+	return false;
+}
 
 
 if (unicos.length > 10){

@@ -4,21 +4,17 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>Trabajo Practico Integrador Inteligencia Artificial</title>
+  <title>Trabajo Practico Integrador - Inteligencia Artificial</title>
 
-  <!-- CSS  -->
-<!--   <link href="css/icon.css" rel="stylesheet">
-  <link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/> -->
 
   <link href="css/icon.css" rel="stylesheet">
   <link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
 </head>
-<body>
+<body background="img/background.png">
   <nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+    <div class="nav-wrapper container">
       <ul class="right hide-on-med-and-down">
         <li><a href="#">Bibliografía</a></li>
       </ul>
@@ -29,65 +25,91 @@
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
   </nav>
+<br>
 
-<div>
 <div class="container">
-  
-  <br>
-  <H5>Cargar valores</H5>
-   <form class="col s12" action="javascript:run()">
-
 <div class="row">
-  
-        <div class="input-field col s3">
-          <input id="operador1" type="text" class="validate" style='text-transform:uppercase'>
+
+
+        <div class="col s8">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Abstract</span>
+              <br>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+              proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+              proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+          </div>
+        </div>
+      
+
+
+      
+        <div class="col s4">
+          <div class="card grey darken-1">
+ <form action="javascript:run()">
+
+            <div class="card-content white-text">
+              <span class="card-title">Cargar datos</span>
+              <br>
+        <div class="input-field ">
+          <i class="material-icons prefix"></i>
+          <input id="operador1" type="text" class="validate" style='text-transform:uppercase; border-bottom: 1px solid white;'>
           <label for="operador1">Primer Operador</label>
         </div>
-         <i style="padding-top: 24px" class="material-icons col s1">add</i>
-        <div class="input-field col s3">
-          <input id="operador2" type="text" class="validate" style='text-transform:uppercase'>
+         
+        <div class="input-field">
+          <i class="material-icons prefix" style="padding-top: 10px">add</i>
+          <input id="operador2" type="text" class="validate" style='text-transform:uppercase; border-bottom: 1px solid white;'>
           <label for="operador2">Segundo Operador</label>
         </div>
-        <i style="padding-top: 24px" class="material-icons col s1">drag_handle</i>
-            <div class="input-field col s3">
-          <input id="resultado" type="text" class="validate" style='text-transform:uppercase'>
+        
+            <div class="input-field">
+              <i class="material-icons prefix " style="padding-top: 10px" >drag_handle</i>
+          <input id="resultado" type="text" class="validate" style='text-transform:uppercase; border-bottom: 1px solid white;'>
           <label for="resultado">Resultado</label>
         </div>
-         
-           <button style="margin-top: 20px"class="btn waves-effect waves-light col s1" type="submit" name="action"><i class="material-icons">send</i>
+
+            </div>
+            <div class="card-action">
+              <button class="btn-large btn-floating waves-effect waves-light" type="submit" name="action" style="float:right;bottom:7px"><i class="tiny material-icons">send</i>
           </button>
-        </div> 
-         
-    </form>
-</div>
-</div>
+            </div>
+          </form>
+          </div>
+        </div>
+        </div>
+     
 
 
-<div class="container">
+</div>
+
+<div class="section" style="background-color: rgba(158, 158, 158, 0.48)">
+
+<div class="container white-text">
+  <h5>Fireflys</h5>
     <div class="row" id="fireflys">
-     <!--  <div class="col s3" >     
-        <div class="card blue-grey darken-1">
-          <div class="card-content white-text">
-            <img src="css/firefly.png" style="width:20px;height:20px; color: white">
-            <span class="card-title">Luciernaga</span>
-            <br>
-            <p style="text-align: right;"> 9<sub> S</sub> 4<sub> E</sub> 6<sub> N</sub> 2<sub> D</sub></p>
-            <span style="float: left;">+</span>
-            <p style="text-align: right;"> 9<sub> S</sub> 4<sub> E</sub> 6<sub> N</sub> 2<sub> D</sub></p>
-            <div class="divider"></div>
-            <p style="text-align: right;"> 9<sub> S</sub> 4<sub> E</sub> 6<sub> N</sub> 2<sub> D</sub></p>
-          </div>
-          <div class="divider"></div>
-          <div class="card-content white-text" style="padding-top: 7px; padding-bottom: 5px;">
-            <p><i class="tiny material-icons">brightness_5</i> </p>
-          </div>
-        </div> -->
+
       </div>
 
       </div>
     </div>
 
-
+</div>
  
 
 
