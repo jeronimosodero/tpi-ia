@@ -6,18 +6,18 @@
  * Made By MaterializeCSS.com
  */
 
-input {
-	border-bottom: 1px solid white
-}
+ input {
+ 	border-bottom: 1px solid white;
+ }
 
-   .input-field label {
-     color: white;
-         
-   }
+ .input-field label {
+ 	color: white;
+ 	
+ }
 
-   .input-field input[type=text]:focus + label {
-     color: white;
-   }
+ .input-field input[type=text]:focus + label {
+ 	color: white;
+ }
 
  
 
@@ -25,9 +25,9 @@ input {
  	color: #9E9E9E;
  }
 
-.icon-block {
-  padding: 0 15px;
-}
-.icon-block .material-icons {
-	font-size: inherit;
-}
+ .icon-block {
+ 	padding: 0 15px;
+ }
+ .icon-block .material-icons {
+ 	font-size: inherit;
+ }
