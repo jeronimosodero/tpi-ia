@@ -1,7 +1,7 @@
 //esta todo mal
 var MAX_GEN = 50;
 
-var initialPopulation = 10;
+var initialPopulation = 8;
 
 var nameLuciernagas = [];
 
@@ -17,7 +17,7 @@ var res;
 function run(){
 	if (checkInput()) {
 		mostrarLuciernagas(generarLuciernagas());
-		FA();
+		mostrarLuciernagas(FA());
 	}
 
 }
@@ -25,8 +25,6 @@ function run(){
 function checkInput(){
 
 	leerInput()
-
-
 
 	var max;
 
@@ -122,8 +120,22 @@ function generarLuciernagas(){
 	leerInput();
 
 	var unicos = [];
-	var suma = operador1 + operador2 + resultado;
 
+	operador1 = operador1.split("").reverse().join("");
+	operador2 = operador2.split("").reverse().join("");
+	resultado = resultado.split("").reverse().join("");
+	
+	var suma = "";
+
+	for (var i = 0; i < resultado.length; i++) {
+		
+		if (i < operador1.length) suma += operador1[i];
+		if (i < operador2.length) suma += operador2[i];
+		suma += resultado[i];
+	};
+
+	suma = suma.split("").reverse().join("");
+	
 
 	for (i = 0;i < suma.length; i++) {
 		if(unicos.indexOf(suma[i])==-1){
@@ -133,6 +145,7 @@ function generarLuciernagas(){
 
 
 	var luciernagas = [];
+
 	for(j=0;j<initialPopulation;j++){
 		var luc = {};
 		for(i = 0; i < unicos.length;i++){
@@ -186,6 +199,8 @@ function error(luc){
 			var distancia = 0;
 			for (x in luc1){
 				distancia+=Math.abs(luc1[x]-luc2[x]);
+				/*console.log(luc1[x]," - ",luc2[x]," = ", Math.abs(luc1[x]-luc2[x]));
+				console.log("acumulado: ", distancia);*/
 			}
 			return distancia;
 		}
@@ -198,27 +213,30 @@ function error(luc){
 		function FA(){
 
 			var luciernagas = generarLuciernagas();
-			for(var x in luciernagas){
-				console.log(error(x));
-			}
-			var i = 0;
+			
+			var k = 0;
 
-			while (i < MAX_GEN) {
+			while (k < MAX_GEN) {
 				for (var i = 0; i < initialPopulation; i++) {
-					for (var j = i+1; j < initialPopulation; j++) {			
+					for (var j = 0; j < initialPopulation; j++) {
+					console.log("luciernaga ",i," (",error(luciernagas[i]),") con ",j," (",error(luciernagas[j]),")");
+
 						if (error(luciernagas[i])<error(luciernagas[j])){
-					acercar(luciernagas[i],luciernagas[j],1);
+							
+						acercar(luciernagas[i],luciernagas[j],2,5);
+						console.log("luciernaga ",i," (",error(luciernagas[i]),") luciernaga",j," (",error(luciernagas[j]),")");
 
 					
 				}
 
 			};
 		};
+
+		k++;
+		console.log("ciclo:", k);
 	}
-for(var x in luciernagas){
-	console.log(error(x));
-}
-	
+
+	return luciernagas;
 
 }
 
