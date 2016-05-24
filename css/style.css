@@ -11,15 +11,12 @@
  }
 
  .input-field label {
- 	color: white;
- 	
+ 	color: white; 	
  }
 
  .input-field input[type=text]:focus + label {
  	color: white;
- }
-
- 
+ } 
 
  sub {
  	color: #9E9E9E;
@@ -31,3 +28,46 @@
  .icon-block .material-icons {
  	font-size: inherit;
  }
+
+ .modal {
+ 	width:70% !important;
+ 	overflow:auto !important;
+}
+ }
+
+ .modal .modal-header {
+ 	padding: 9px;
+    padding-left: 25px;
+    background-color: #444;
+    color: white;
+    position: absolute;
+ }
+
+ .luc .card .card-content{
+ 	padding-top: 12px;
+ }
+
+ .luc img {
+ 	width: 20px;
+    height: 20px;
+    color: white;
+ }
+
+ .luc .card  .bright {
+ 	padding-top: 7px;
+ 	padding-bottom: 5px;
+ }
+
+ .luc .card .rbright {
+ 	margin-bottom: 0px; 
+ 	margin-top: 5px; 
+ 	margin-right: 0px;
+ 	margin-left: 0px
+ }
+
+#brighticon {
+ 	padding-left: 5px !important; 
+ 	padding-top: 2px !important
+ }
+
+

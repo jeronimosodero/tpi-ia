@@ -1,18 +1,28 @@
+  $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal-trigger').leanModal();
+  });
+ 
+var htmlModals = [];       
 
+function mostrarLuciernagas(luciernagas, container){
 
-function mostrarLuciernagas(luciernagas){
+	for(var i=0; i < luciernagas.length; i++) mostrarLuciernaga(luciernagas[i],container, i)
 
-	leerInput();
+}
 
+function mostrarLuciernaga(luc, container, i){
 
-	for(var i=0; i < luciernagas.length; i++){
-		split();
+	var op1 = readOp1(true);
+	var op2 = readOp2(true);
+	var res = readRes(true);
+
 		var textop1 = '<p style="text-align: right;"> '
 		var textop2 = '<p style="text-align: right;"> '
 		var textres = '<p style="text-align: right;"> '
 		
 		for (var j = 0; j < op1.length; j++) {
-			textop1 += luciernagas[i][op1[j]];
+			textop1 += luc[op1[j]];
 			textop1 += '<sub> ';
 			textop1 += [op1[j][0]];
 			textop1 += '</sub> ';
@@ -20,7 +30,7 @@ function mostrarLuciernagas(luciernagas){
 		textop1 += '</p>';
 
 		for (var j = 0; j < op2.length; j++) {
-			textop2 += luciernagas[i][op2[j]];
+			textop2 += luc[op2[j]];
 			textop2 += '<sub> ';
 			textop2 += [op2[j]][0];
 			textop2 += '</sub> ';
@@ -28,34 +38,90 @@ function mostrarLuciernagas(luciernagas){
 		textop2 += '</p>';
 
 		for (var j = 0; j < res.length; j++) {
-			textres += luciernagas[i][res[j]];
+			textres += luc[res[j]];
 			textres += '<sub> ';
 			textres += [res[j][0]];
 			textres += '</sub> ';
 		};
 		textres += '</p>';
 
-		var porError = (error(luciernagas[i])/maxError())*100
+		var porError = error(luc);
+
+
+		var html = '<div class="col s3">\
+						<div class="card blue-grey darken-1">\
+							<div class="card-content white-text">\
+								<img src="css/firefly.png">\
+									<span class="card-title">'+nameLuciernagas[i]+'<sub>['+i+']</sub></span>\
+									<br>\
+									'+textop1+'<span style="float: left;">+</span>\
+									'+textop2+'<div class="divider"></div>'+textres+'</div>\
+									<div class="divider"></div>\
+									<div class="bright card-content white-text">\
+										<div class="rbright row">\
+											<div class="col s2" id="brighticon">\
+											<i style="float: left;" class="tiny material-icons">brightness_5</i>\
+											</div>\
+											<div class="progress col s8"><div class="determinate" style="width:'+porError+'%"></div>\
+										</div>\
+										<p class="col s2 right">'+error(luc)+'</p>\
+									</div>\
+							</div>\
+						</div>\
+					</div>'
 
 		$('<div/>', {
-			'class':'col s3',
-			'html': '<div class="card blue-grey darken-1">\
-			<div class="card-content white-text">\
-			<img src="css/firefly.png" style="width:20px;height:20px; color: white">\
-			<span class="card-title">'+nameLuciernagas[i]+'</span>\
-			<br>\
-			'+textop1+'<span style="float: left;">+</span>'+textop2+'<div class="divider"></div>'+textres+'\
-			</div>\
-			<div class="divider"></div>\
-			<div class="card-content white-text" style="padding-top: 7px; padding-bottom: 5px;">\
-			<div class="row" style="margin-bottom: 0px; margin-top: 5px; margin-right: 0px;\
-			margin-left: 0px;"><div class="col s3"><i style="float: left" class="tiny material-icons">brightness_5</i></div>\
-			<div class="progress col s9" ><div class="determinate" style="width:'+porError+'%"></div></div>\
-			</div></div>\
-			</div>'
-		}).appendTo('#fireflys');
-	}
+			'class':'luc',
+			'html': html
+		}).appendTo(container);
 
+}
+
+function checkIndex(luciernagas,luc){
+	for (var i = 0; i < luciernagas.length; i++) {
+		if (luciernagas[i] = luc) return i;
+	};
+	return -1;
+}
+
+function agregarPad(){
+		var html = '<div class="container white-text">\
+      					<h5>Población Final</h5>\
+      					<div class="divider"></div>\
+     					<br>\
+      					<div class="row" id="pobfin">\
+      					</div>\
+    				</div>';
+
+	$('<div/>', {
+			'class':'section',
+			'id': 'poblacionfinal',
+			'style': 'background-color: rgba(158, 158, 158, 0.48)',
+			'html': html
+		}).appendTo("#numero1")
+}
+
+
+function agregarTrending(trending,container){
+		var html = '<p>'+trending+'</p>\
+		<i class="material-icons" style="font-size: -webkit-xxx-large">trending_flat</i>';
+
+	$('<div/>', {
+			'class':'col s1',
+			'style': 'text-align: center;margin-top: 50px;',
+			'html': html
+		}).appendTo(container)
+}
+
+function agregarShuffle(shuffle,container){
+		var html = '<p>'+shuffle+'</p>\
+		<i class="material-icons" style="font-size: -webkit-xxx-large">shuffle</i>';
+
+	$('<div/>', {
+			'class':'col s1',
+			'style': 'text-align: center;margin-top: 50px;',
+			'html': html
+		}).appendTo(container)
 }
 
 

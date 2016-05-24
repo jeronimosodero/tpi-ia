@@ -1,12 +1,12 @@
-f1 = {"M":0,"O":1,"S":3,"N":8,"E":6,"R":5,"Y":2,"D":4};
-f2 = {"M":5,"O":7,"S":8,"N":1,"E":6,"R":4,"Y":0,"D":2};
+function acercar(luc1,luc2,paso,toler){
 
-function acercar(luc1,luc2,min,max){
+	var min = paso + toler;
+	var max = paso - toler;
+
+	if (max < 0) max = paso;
 
 	var dist = distanciaManhattan(luc1,luc2);
-	console.log("distancia inicial: ", dist);
-	consoleLuc(luc1);
-	consoleLuc(luc2);
+
 	var luct2t;
 	
 	for (var x in luc2) {
@@ -16,35 +16,101 @@ function acercar(luc1,luc2,min,max){
 		if (luc2[x] == luc1[x]) continue;
 
 		var resg = luc2[x];
-		//console.log("resguardo: ", resg);
-		
+				
 		var ind = searchbyNum(luc2,luc1[x])
-		//console.log("el valor ", luc1[x],"en luc2 esta en el indice: ",ind);
-
+		
 		luc2[x]=luc1[x];
 
-		//console.log("luc2 en ",x," toma el valor ", luc2[x]," de luc1 en ", x);
-
 		if (ind) luc2[ind] = resg;
-		//console.log("luc2 temporal: ");
-		//consoleLuc(luc2);
-
 
 		var newDist = distanciaManhattan(luc1,luc2);
-		//console.log("nueva distancia: ", newDist);
-
+		
 		if ((newDist >= (dist-max)) && (newDist < (dist-min))) break;
 
 		if ((newDist > dist) || (newDist < (dist-max))){ luc2 = luc2t ;luc2t= null	}
 		 
 	}
+
+
+
 	console.log("distancia inicial: ",dist);
 	console.log("distancia final: ",distanciaManhattan(luc1,luc2));
 	console.log("diferencia",dist-distanciaManhattan(luc1,luc2));
-	consoleLuc(luc1);
+	console.log("luciernaga movida (",error(luc2),") : ");
 	consoleLuc(luc2);
+	
+
+	
+	return (dist-distanciaManhattan(luc1,luc2))
+}
+
+function heterogeneidad(luciernagas){
+	var c=0;
+
+	for (var i = 0; i < luciernagas.length; i++) {
+		for (var j = i+1; j < luciernagas.length; j++) {
+			if (equals(luciernagas[i],luciernagas[j])) c++;
+		};
+	};
+
+	return c
+}
+
+function mutar(luc,heter){
+
+	var vic1=0;
+	var indvic1;
+	var vic2=0;
+	var indvic2;
+	var resg=0;
+	var nums;
+
+	for (var i = 0; i < heter; i++) {
+		
+		vic1 = Math.trunc(Math.random()*10);
+		
+		numb = getNumbers(luc);
+
+		var index = numb.indexOf(vic1);
+		if (index > -1) {
+    		numb.splice(index, 1);
+			}
+
+		vic2 = Math.trunc(Math.random()*10);
+
+		while ((vic2 == vic1) || ($.inArray(vic2, numb)<0)) vic2 = Math.trunc(Math.random()*10);
+				
+		indvic1=searchbyNum(luc,vic1);
+		indvic2=searchbyNum(luc,vic2);
+
+		if (indvic1) {
+			luc[indvic1]=vic2;
+			luc[indvic2]=vic1;
+		} else {
+			luc[indvic2]=vic1;
+		}
+
+
+};
 
 }
+
+function getNumbers(luc){
+	var array = [];
+	for (var x in luc) array.push(luc[x]);
+	return array
+}
+
+function equals(luc1,luc2){
+	var band = true;
+	for (var x in luc1) {
+		if (luc1[x] !== luc2[x]) {
+			band = false;
+		}
+	}
+	return band;
+}
+
 
 function searchbyNum(luc,value){
 	for (var x in luc) {
@@ -115,8 +181,6 @@ function max(luc){
 			let=x;
 			max=luc[x];
 		}
-
 	}
-
 	return let
 }

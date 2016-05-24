@@ -1,30 +1,37 @@
 //esta todo mal
-var MAX_GEN = 50;
+var MAX_GEN = 20;
 
 var initialPopulation = 8;
 
 var nameLuciernagas = [];
 
-var operador1;
-var operador2;
-var resultado;
-
-var op1;
-var op2;
-var res;
-
+var htmlarray = [];
 
 function run(){
-	if (checkInput()) {
-		mostrarLuciernagas(generarLuciernagas());
-		mostrarLuciernagas(FA());
-	}
 
+	agregarPad();
+
+	if (checkInput()) {
+		var luciernagas = generarLuciernagas();
+		mostrarLuciernagas(FA(luciernagas),'#pobfin');
+		console.log(heterogeneidad(luciernagas));
+ 		scrollDown('#poblacionfinal')
+	}
+	
+
+}
+
+function scrollDown(element){
+	$('html, body').animate({
+         scrollTop: $(element).offset().top
+    }, 2000);
 }
 
 function checkInput(){
 
-	leerInput()
+	var operador1 = readOp1(true);
+	var operador2 = readOp2(true);
+	var resultado = readRes(true);
 
 	var max;
 
@@ -89,42 +96,36 @@ function checkInput(){
 	return true;
 }
 
+function readOp1(way){
 
+	var input = document.getElementById("operador1").value.trim().toUpperCase();
 
-function leerInput(){
-	operador1 = "";
-	operador2 = "";
-	resultado = "";
-	operador1 = document.getElementById("operador1").value.trim().toUpperCase();
-	operador2 = document.getElementById("operador2").value.trim().toUpperCase();
-	resultado = document.getElementById("resultado").value.trim().toUpperCase();
-
+	if (way) return input
+		else return input.split("").reverse().join("");
 }
 
+function readOp2(way){
+	var input = document.getElementById("operador2").value.trim().toUpperCase();
 
-function splitReverse(){
-	op1 = operador1.split("").reverse();
-	op2 = operador2.split("").reverse();
-	res = resultado.split("").reverse();
+	if (way) return input
+		else return input.split("").reverse().join("");
 }
 
-function split(){
-	op1 = operador1.split("");
-	op2 = operador2.split("");
-	res = resultado.split("");
-}
+function readRes(way){
+	var input = document.getElementById("resultado").value.trim().toUpperCase();
 
+	if (way) return input
+		else return input.split("").reverse().join("");
+}
 
 function generarLuciernagas(){
 
-	leerInput();
+	var operador1 = readOp1(false);
+	var operador2 = readOp2(false);
+	var resultado = readRes(false);
 
 	var unicos = [];
 
-	operador1 = operador1.split("").reverse().join("");
-	operador2 = operador2.split("").reverse().join("");
-	resultado = resultado.split("").reverse().join("");
-	
 	var suma = "";
 
 	for (var i = 0; i < resultado.length; i++) {
@@ -143,7 +144,6 @@ function generarLuciernagas(){
 		}
 	}
 
-
 	var luciernagas = [];
 
 	for(j=0;j<initialPopulation;j++){
@@ -161,7 +161,6 @@ function generarLuciernagas(){
 	return luciernagas;
 }
 
-
 function exists(luciernaga, nro) {
 	for(var x in luciernaga){
 		if(luciernaga[x]==nro){
@@ -172,7 +171,11 @@ function exists(luciernaga, nro) {
 }
 
 function error(luc){
-	splitReverse();
+
+	var op1 = readOp1(false);
+	var op2 = readOp2(false);
+	var res = readRes(false);
+
 	var acarreo=0;
 	var h=0;
 	var error=0;
@@ -191,54 +194,64 @@ function error(luc){
 				}
 				error+=Math.abs(h);
 			};
-			return  maxError() - error;
-		}
+			return  error;
+}
 
+function distanciaManhattan(luc1,luc2){
+	var distancia = 0;
+	for (x in luc1){
+		distancia+=Math.abs(luc1[x]-luc2[x]);
+	}
+	return distancia;
+}
 
-		function distanciaManhattan(luc1,luc2){
-			var distancia = 0;
-			for (x in luc1){
-				distancia+=Math.abs(luc1[x]-luc2[x]);
-				/*console.log(luc1[x]," - ",luc2[x]," = ", Math.abs(luc1[x]-luc2[x]));
-				console.log("acumulado: ", distancia);*/
-			}
-			return distancia;
-		}
+function FA(luciernagas){
 
-
-		function maxError(){
-			return resultado.length *9
-		}
-
-		function FA(){
-
-			var luciernagas = generarLuciernagas();
+	var k = 0;
+	var heter;
+	var dist;
+	
+	while (k < MAX_GEN) {
+		for (var i = 0; i < initialPopulation; i++) {
+			for (var j = 0; j < initialPopulation; j++) {
 			
-			var k = 0;
-
-			while (k < MAX_GEN) {
-				for (var i = 0; i < initialPopulation; i++) {
-					for (var j = 0; j < initialPopulation; j++) {
-					console.log("luciernaga ",i," (",error(luciernagas[i]),") con ",j," (",error(luciernagas[j]),")");
-
-						if (error(luciernagas[i])<error(luciernagas[j])){
-							
-						acercar(luciernagas[i],luciernagas[j],2,5);
-						console.log("luciernaga ",i," (",error(luciernagas[i]),") luciernaga",j," (",error(luciernagas[j]),")");
-
+				if (error(luciernagas[i])<error(luciernagas[j])){
 					
+					heter = heterogeneidad(luciernagas);
+					if (j==1) mostrarLuciernaga(luciernagas[j],'#modali1',j);
+
+				console.log("-----------------------------------------------");
+				console.log("luciernaga ",i," (",error(luciernagas[i]),")");
+				consoleLuc(luciernagas[i]);	
+				console.log("luciernaga ",j," (",error(luciernagas[j]),")");
+				consoleLuc(luciernagas[j]);	
+
+				dist = acercar(luciernagas[i],luciernagas[j], Math.abs(distanciaManhattan(luciernagas[i],luciernagas[j])/4),3);
+				
+				if (j==1) agregarTrending(dist,'#modali1');
+
+				if (j==1) mostrarLuciernaga(luciernagas[i],'#modali1',i);
+				console.log("heter: ", heter);
+				mutar(luciernagas[j],heter);
+				console.log("luciernaga mutada (",error(luciernagas[j]),"): ");
+				consoleLuc(luciernagas[j]); error(luciernagas[j]);
+				
+				if (j==1) agregarShuffle(heter,'#modali1');
+
+				if (j==1) mostrarLuciernaga(luciernagas[j],'#modali1',j);
+
 				}
 
 			};
 		};
 
 		k++;
+		
 		console.log("ciclo:", k);
 	}
-
 	return luciernagas;
-
 }
+
 
 
 
