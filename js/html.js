@@ -53,6 +53,7 @@ function mostrarLuciernaga(luc, container, i){
 							<div class="card-content white-text">\
 								<img src="css/firefly.png">\
 									<span class="card-title">'+nameLuciernagas[i]+'<sub>['+i+']</sub></span>\
+									<a class="modal-trigger" href="#modal'+i+'" style="float: right;color: white"><i class="tiny material-icons">book</i></a>\
 									<br>\
 									'+textop1+'<span style="float: left;">+</span>\
 									'+textop2+'<div class="divider"></div>'+textres+'</div>\
@@ -102,7 +103,7 @@ function agregarPad(){
 }
 
 
-function agregarTrending(trending,container){
+function appendTrending(trending,container){
 		var html = '<p>'+trending+'</p>\
 		<i class="material-icons" style="font-size: -webkit-xxx-large">trending_flat</i>';
 
@@ -113,7 +114,7 @@ function agregarTrending(trending,container){
 		}).appendTo(container)
 }
 
-function agregarShuffle(shuffle,container){
+function appendShuffle(shuffle,container){
 		var html = '<p>'+shuffle+'</p>\
 		<i class="material-icons" style="font-size: -webkit-xxx-large">shuffle</i>';
 
@@ -122,6 +123,52 @@ function agregarShuffle(shuffle,container){
 			'style': 'text-align: center;margin-top: 50px;',
 			'html': html
 		}).appendTo(container)
+}
+
+function agregarCiclo(ciclo,container){
+		var html = '<h5>Ciclo: '+ciclo+'</h5>';
+
+	$('<div/>', {
+			'class':'col s12',
+			'html': html
+		}).appendTo(container)
+}
+
+function showHistory(luc1,luc2,dist,heter,luc2beforemuted,i,j){
+
+	var container = '#modalrow'+j;
+	console.log("----------------------------",container);
+
+	mostrarLuciernaga(luc2beforemuted,container,j);
+
+	appendTrending(dist,container);
+
+	mostrarLuciernaga(luc1,container,i);
+
+	appendShuffle(heter,container);
+
+	mostrarLuciernaga(luc2,container,j);
+
+}
+
+function modalsDisplay(){
+
+	var html;
+
+	for (var i = 0; i < initialPopulation; i++) {
+
+		var html = '<div id="modal'+i+'" class="modal modal-fixed-footer">\
+    					<div class="modal-content">\
+     						<div class="row" id="modalrow'+i+'"></div></div>\
+    					<div class="modal-footer">\
+      						<h5>Historia de '+nameLuciernagas[i]+'<sub>['+i+']</sub></h5>\
+    					</div>\
+  					</div>';
+
+  		$('<div/>', {
+			'html': html
+		}).appendTo('#modalfarm')
+	};
 }
 
 

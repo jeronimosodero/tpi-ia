@@ -1,22 +1,24 @@
 //esta todo mal
-var MAX_GEN = 20;
+var MAX_GEN = 30;
 
 var initialPopulation = 8;
 
 var nameLuciernagas = [];
 
-var htmlarray = [];
-
 function run(){
 
 	agregarPad();
+	
 
 	if (checkInput()) {
 		var luciernagas = generarLuciernagas();
+		modalsDisplay();
+
 		mostrarLuciernagas(FA(luciernagas),'#pobfin');
-		console.log(heterogeneidad(luciernagas));
- 		scrollDown('#poblacionfinal')
+		scrollDown('#poblacionfinal')
 	}
+
+$('.modal-trigger').leanModal();
 	
 
 }
@@ -207,18 +209,24 @@ function distanciaManhattan(luc1,luc2){
 
 function FA(luciernagas){
 
+
+
 	var k = 0;
 	var heter;
 	var dist;
+	var luc2res;
 	
-	while (k < MAX_GEN) {
+	while (checkErrors(luciernagas) && k < MAX_GEN) {
+		console.log("ey que onda");
+
 		for (var i = 0; i < initialPopulation; i++) {
 			for (var j = 0; j < initialPopulation; j++) {
 			
 				if (error(luciernagas[i])<error(luciernagas[j])){
 					
 					heter = heterogeneidad(luciernagas);
-					if (j==1) mostrarLuciernaga(luciernagas[j],'#modali1',j);
+					luc2res = jQuery.extend({}, luciernagas[i]);
+					//if (j==1) mostrarLuciernaga(luciernagas[j],'#modali1',j);
 
 				console.log("-----------------------------------------------");
 				console.log("luciernaga ",i," (",error(luciernagas[i]),")");
@@ -226,19 +234,19 @@ function FA(luciernagas){
 				console.log("luciernaga ",j," (",error(luciernagas[j]),")");
 				consoleLuc(luciernagas[j]);	
 
-				dist = acercar(luciernagas[i],luciernagas[j], Math.abs(distanciaManhattan(luciernagas[i],luciernagas[j])/4),3);
+				dist = acercar(luciernagas[i],luciernagas[j], Math.trunc(distanciaManhattan(luciernagas[i],luciernagas[j])/4),3);
 				
-				if (j==1) agregarTrending(dist,'#modali1');
+				//if (j==1) agregarTrending(dist,'#modali1');
 
-				if (j==1) mostrarLuciernaga(luciernagas[i],'#modali1',i);
+				//if (j==1) mostrarLuciernaga(luciernagas[i],'#modali1',i);
 				console.log("heter: ", heter);
 				mutar(luciernagas[j],heter);
 				console.log("luciernaga mutada (",error(luciernagas[j]),"): ");
 				consoleLuc(luciernagas[j]); error(luciernagas[j]);
-				
-				if (j==1) agregarShuffle(heter,'#modali1');
+				showHistory(luciernagas[i],luciernagas[j],dist,heter,luc2res,i,j);
+				//if (j==1) agregarShuffle(heter,'#modali1');
 
-				if (j==1) mostrarLuciernaga(luciernagas[j],'#modali1',j);
+				//if (j==1) mostrarLuciernaga(luciernagas[j],'#modali1',j);
 
 				}
 
@@ -252,7 +260,12 @@ function FA(luciernagas){
 	return luciernagas;
 }
 
-
+function checkErrors(luciernagas){
+	for (var i = 0; i < luciernagas.length; i++) {
+		if (error(luciernagas[i])==0) return false
+	};
+return true
+}
 
 
 
