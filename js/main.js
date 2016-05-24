@@ -183,20 +183,19 @@ function error(luc){
 	var error=0;
 
 	for (var i = 0; i < res.length; i++) {
-		h= acarreo - luc[res[i]];
+		h=acarreo-luc[res[i]];
 		acarreo=0;
 
-		if(i<op1.length) h=h+luc[op1[i]]
-			if(i<op2.length) h=h+luc[op2[i]]
-
-
-				if(h>=10){
-					h=h-10;
-					acarreo=1;
-				}
-				error+=Math.abs(h);
-			};
-			return  error;
+		if(i<op1.length) h=h+luc[op1[i]];
+		if(i<op2.length) h=h+luc[op2[i]];
+		var suma = luc[op1[i]] + luc[op2[i]]+acarreo;
+		if(suma>=10){
+			h=h-10;
+			acarreo=1;
+		}
+		error+=Math.abs(h);
+	};
+	return  error;
 }
 
 function distanciaManhattan(luc1,luc2){
