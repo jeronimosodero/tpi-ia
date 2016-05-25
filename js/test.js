@@ -27,7 +27,7 @@ function acercar(luc1,luc2,paso,toler){
 		
 		if ((newDist >= (dist-max)) && (newDist < (dist-min))) break;
 
-		if ((newDist > dist) || (newDist < (dist-max))){ luc2 = luc2t ;luc2t= null	}
+		if ((newDist >= dist) || (newDist < (dist-max))){ luc2 = luc2t ;luc2t= null	}
 		 
 	}
 

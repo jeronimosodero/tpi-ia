@@ -1,17 +1,21 @@
   $(document).ready(function(){
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal-trigger').leanModal();
+	
+	document.getElementById("initialPopulation").setAttribute("value", initialPopulation);
+	document.getElementById("maxgen").setAttribute("value", MAX_GEN);
+	document.getElementById("attrac").setAttribute("value", attractiveness);
+	document.getElementById("toler").setAttribute("value", tolerancia);
+
   });
- 
-var htmlModals = [];       
 
-function mostrarLuciernagas(luciernagas, container){
+function mostrarLuciernagas(luciernagas, container, history){
 
-	for(var i=0; i < luciernagas.length; i++) mostrarLuciernaga(luciernagas[i],container, i)
+	for(var i=0; i < luciernagas.length; i++) mostrarLuciernaga(luciernagas[i],container, i, history)
 
 }
 
-function mostrarLuciernaga(luc, container, i){
+function mostrarLuciernaga(luc, container, i, history){
 
 	var op1 = readOp1(true);
 	var op2 = readOp2(true);
@@ -47,13 +51,15 @@ function mostrarLuciernaga(luc, container, i){
 
 		var porError = error(luc);
 
+		var moo = '';
+
+		if (history) moo = '<a class="modal-trigger" href="#modal'+i+'" style="float: right;color: white"><i class="tiny material-icons">book</i></a>'
 
 		var html = '<div class="col s3">\
 						<div class="card blue-grey darken-1">\
 							<div class="card-content white-text">\
 								<img src="css/firefly.png">\
-									<span class="card-title">'+nameLuciernagas[i]+'<sub>['+i+']</sub></span>\
-									<a class="modal-trigger" href="#modal'+i+'" style="float: right;color: white"><i class="tiny material-icons">book</i></a>\
+									<span class="card-title">'+nameLuciernagas[i]+'<sub>['+i+']</sub></span>'+moo+'\
 									<br>\
 									'+textop1+'<span style="float: left;">+</span>\
 									'+textop2+'<div class="divider"></div>'+textres+'</div>\
@@ -97,15 +103,16 @@ function agregarPad(){
 	$('<div/>', {
 			'class':'section',
 			'id': 'poblacionfinal',
-			'style': 'background-color: rgba(158, 158, 158, 0.48)',
+			'style': 'background-color: rgba(158, 158, 158, 0.7)',
 			'html': html
-		}).appendTo("#numero1")
+		}).appendTo("#fireflyfarm")
 }
 
 
 function appendTrending(trending,container){
 		var html = '<p>'+trending+'</p>\
-		<i class="material-icons" style="font-size: -webkit-xxx-large">trending_flat</i>';
+		<i class="material-icons" style="font-size: -webkit-xxx-large">trending_flat</i>\
+		<p>Arrimo</p>';
 
 	$('<div/>', {
 			'class':'col s1',
@@ -116,7 +123,8 @@ function appendTrending(trending,container){
 
 function appendShuffle(shuffle,container){
 		var html = '<p>'+shuffle+'</p>\
-		<i class="material-icons" style="font-size: -webkit-xxx-large">shuffle</i>';
+		<i class="material-icons" style="font-size: -webkit-xxx-large">shuffle</i>\
+		<p>Azar</p>';
 
 	$('<div/>', {
 			'class':'col s1',
@@ -125,29 +133,34 @@ function appendShuffle(shuffle,container){
 		}).appendTo(container)
 }
 
-function agregarCiclo(ciclo,container){
-		var html = '<h5>Ciclo: '+ciclo+'</h5>';
+function appendCiclo(ciclo,container){
+		var html = '<p>'+ciclo+'</p>\
+		<i class="material-icons" style="font-size: -webkit-xxx-large">replay</i>\
+		<p>Ciclo</p>';
 
 	$('<div/>', {
-			'class':'col s12',
+			'class':'col s1',
+			'style': 'text-align: center;margin-top: 50px;',
 			'html': html
 		}).appendTo(container)
 }
 
-function showHistory(luc1,luc2,dist,heter,luc2beforemuted,i,j){
+function showHistory(luc1,luc2,dist,heter,luc2beforemuted,i,j,k){
 
 	var container = '#modalrow'+j;
 	console.log("----------------------------",container);
 
-	mostrarLuciernaga(luc2beforemuted,container,j);
+	appendCiclo(k,container);
+
+	mostrarLuciernaga(luc2beforemuted,container,j, false);
 
 	appendTrending(dist,container);
 
-	mostrarLuciernaga(luc1,container,i);
+	mostrarLuciernaga(luc1,container,i, false);
 
 	appendShuffle(heter,container);
 
-	mostrarLuciernaga(luc2,container,j);
+	mostrarLuciernaga(luc2,container,j, false);
 
 }
 
@@ -157,7 +170,7 @@ function modalsDisplay(){
 
 	for (var i = 0; i < initialPopulation; i++) {
 
-		var html = '<div id="modal'+i+'" class="modal modal-fixed-footer">\
+		var html = '<div id="modal'+i+'" class="modal hist modal-fixed-footer">\
     					<div class="modal-content">\
      						<div class="row" id="modalrow'+i+'"></div></div>\
     					<div class="modal-footer">\

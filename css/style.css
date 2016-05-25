@@ -29,13 +29,29 @@
  	font-size: inherit;
  }
 
- .modal {
+ .modal.hist{
  	width:80% !important;
  	overflow:auto !important;
+ 	border-radius: 5px !important;
+ 	max-height: 80% !important;
+ 	height: 80% !important;
 }
+
+.modal {
+	border-radius: 5px !important;
+}
+ 
+.modal.hist .modal-content {
+	    background-image: url(../img/stripes.png) !important;
+}
+
+.modal .modal-footer {
+ 	color: white !important;
+    background-color: rgba(68, 68, 68, 0.75) !important;
+    padding-left: 15px !important;
  }
 
- .modal .modal-header {
+ .modal.hist .modal-header {
  	padding: 9px;
     padding-left: 25px;
     background-color: #444;
