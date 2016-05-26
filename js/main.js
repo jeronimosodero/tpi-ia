@@ -215,6 +215,26 @@ function error(luc){
 	return  error;
 }
 
+/*
+function error(luc){
+	var op1 = readOp1(true);
+	var op2 = readOp2(true);
+	var res = readRes(true);
+	var error = Math.abs(toNumber(luc,res)-(toNumber(luc,op1)+toNumber(luc,op2)));
+	//console.log(toNumber(luc,res)+":"+toNumber(luc,op1)+":"+toNumber(luc,op2));
+	//console.log(error);
+	
+	return error;
+}
+*/
+function toNumber(luc,op){
+	var res = "";
+	for(var i =0; i<op.length;i++){
+		res+=luc[op[i]];
+	}
+	return (parseInt(res));
+}
+
 function distanciaManhattan(luc1,luc2){
 	var distancia = 0;
 	for (x in luc1){
