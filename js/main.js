@@ -1,14 +1,4 @@
-var MAX_GEN = 30;
-
-var initialPopulation = 8;
-
-var attractiveness = 0.25;
-
-var tolerancia = 5;
-
 var nameLuciernagas = [];
-
-
 
 function update(){
 	console.log("ddds");
@@ -278,7 +268,7 @@ function FA(luciernagas){
 				mutar(luciernagas[j],heter);
 				console.log("luciernaga mutada (",error(luciernagas[j]),"): ");
 				consoleLuc(luciernagas[j]); error(luciernagas[j]);
-				showHistory(luciernagas[i],luciernagas[j],dist,heter,luc2res,i,j,k);
+				//showHistory(luciernagas[i],luciernagas[j],dist,heter,luc2res,i,j,k);
 				//if (j==1) agregarShuffle(heter,'#modali1');
 
 				//if (j==1) mostrarLuciernaga(luciernagas[j],'#modali1',j);
