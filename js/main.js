@@ -1,7 +1,7 @@
 var nameLuciernagas = [];
 
 function update(){
-	console.log("ddds");
+	//console.log("ddds");
 	initialPopulation = document.getElementById("initialPopulation").value;
 	MAX_GEN = document.getElementById("maxgen").value;
 	attractiveness = document.getElementById("attrac").value;	
@@ -177,7 +177,7 @@ function exists(luciernaga, nro) {
 	return false;
 }
 
-function error(luc){
+/*function error(luc){
 
 	var op1 = readOp1(false);
 	var op2 = readOp2(false);
@@ -203,20 +203,25 @@ function error(luc){
 		error+=Math.abs(h);
 	};
 	return  error;
-}
+}*/
 
-/*
+
 function error(luc){
 	var op1 = readOp1(true);
 	var op2 = readOp2(true);
 	var res = readRes(true);
 	var error = Math.abs(toNumber(luc,res)-(toNumber(luc,op1)+toNumber(luc,op2)));
-	//console.log(toNumber(luc,res)+":"+toNumber(luc,op1)+":"+toNumber(luc,op2));
-	//console.log(error);
+	var suma=0;
+	var errorString = error.toString();
+	for (var i = 0; i < errorString.length; i++) {
+		suma+=parseInt(errorString[i]);
+	};
+	////console.log(toNumber(luc,res)+":"+toNumber(luc,op1)+":"+toNumber(luc,op2));
+	////console.log(error);
 	
-	return error;
+	return suma;
 }
-*/
+
 function toNumber(luc,op){
 	var res = "";
 	for(var i =0; i<op.length;i++){
@@ -230,6 +235,8 @@ function distanciaManhattan(luc1,luc2){
 	for (x in luc1){
 		distancia+=Math.abs(luc1[x]-luc2[x]);
 	}
+
+
 	return distancia;
 }
 
@@ -242,41 +249,51 @@ function FA(luciernagas){
 	var dist;
 	var luc2res;
 	
-	while (checkErrors(luciernagas) && k < MAX_GEN) {
+	while (checkErrors(luciernagas) && k< MAX_GEN) {
 		
 		for (var i = 0; i < initialPopulation; i++) {
+
 			for (var j = 0; j < initialPopulation; j++) {
-			
+				heter = heterogeneidad(luciernagas);
+				luc2res = jQuery.extend({}, luciernagas[j]);
 				if (error(luciernagas[i])<error(luciernagas[j])){
 					
-					heter = heterogeneidad(luciernagas);
-					luc2res = jQuery.extend({}, luciernagas[j]);
-					//if (j==1) mostrarLuciernaga(luciernagas[j],'#modali1',j);
+					
 
-				console.log("-----------------------------------------------");
-				console.log("luciernaga ",i," (",error(luciernagas[i]),")");
-				consoleLuc(luciernagas[i]);	
-				console.log("luciernaga ",j," (",error(luciernagas[j]),")");
+				//console.log("-----------------------------------------------");
+				//console.log("luciernaga (quieta)",i," (",error(luciernagas[i]),")");
+				//consoleLuc(luciernagas[i]);	
+				//console.log("luciernaga (mueve)",j," (",error(luciernagas[j]),")");
+				//consoleLuc(luciernagas[j]);	
+
+				dist = acercar(Math.trunc(distanciaManhattan(luciernagas[i],luciernagas[j])*attractiveness),tolerancia,luciernagas,i,j);
+				
+				console.log("luciernaga ni bien sale del acercar",j," (",error(luciernagas[j]),")");
 				consoleLuc(luciernagas[j]);	
 
-				dist = acercar(luciernagas[i],luciernagas[j], Math.trunc(distanciaManhattan(luciernagas[i],luciernagas[j])* attractiveness),tolerancia);
-				
-				//if (j==1) agregarTrending(dist,'#modali1');
-
-				//if (j==1) mostrarLuciernaga(luciernagas[i],'#modali1',i);
 				console.log("heter: ", heter);
-				mutar(luciernagas[j],heter);
+				mutar(luciernagas,heter, j);
 				console.log("luciernaga mutada (",error(luciernagas[j]),"): ");
-				consoleLuc(luciernagas[j]); error(luciernagas[j]);
-				//showHistory(luciernagas[i],luciernagas[j],dist,heter,luc2res,i,j,k);
-				//if (j==1) agregarShuffle(heter,'#modali1');
+				consoleLuc(luciernagas[j]); 
+showHistory(luciernagas[i],luciernagas[j],dist,heter,luc2res,i,j,k);
+				}else if( i != j && error(luciernagas[i])==error(luciernagas[j])){
+					console.log("error igual");
 
-				//if (j==1) mostrarLuciernaga(luciernagas[j],'#modali1',j);
+				console.log("luciernaga antes de mutar cuando es igual",j," (",error(luciernagas[j]),")");
+				consoleLuc(luciernagas[j]);
 
+					mutar(luciernagas,2, j);
+					showHistory(luciernagas[i],luciernagas[j],5987,2,luc2res,i,j,k);
+					console.log("luciernaga despues de mutar cuando es igual",j," (",error(luciernagas[j]),")");
+				consoleLuc(luciernagas[j]);
 				}
 
-			};
-		};
+
+			}
+
+		}
+
+		
 
 		k++;
 		

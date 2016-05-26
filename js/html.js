@@ -148,7 +148,6 @@ function appendCiclo(ciclo,container){
 function showHistory(luc1,luc2,dist,heter,luc2beforemuted,i,j,k){
 
 	var container = '#modalrow'+j;
-	console.log("----------------------------",container);
 
 	appendCiclo(k,container);
 
