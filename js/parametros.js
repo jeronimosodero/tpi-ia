@@ -1,6 +1,6 @@
-var MAX_GEN = 30;
+var MAX_GEN = 200;
 
-var initialPopulation = 12;
+var initialPopulation = 8;
 
 var attractiveness = 0.25;
 

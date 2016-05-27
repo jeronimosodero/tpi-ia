@@ -10,12 +10,15 @@
   });
 
 function mostrarLuciernagas(luciernagas, container, history){
-
-	for(var i=0; i < luciernagas.length; i++) mostrarLuciernaga(luciernagas[i],container, i, history)
+	var errore;
+	for(var i=0; i < luciernagas.length; i++) {
+		if (error(luciernagas[i])==0) {errore=true} else {errore=false;}
+		mostrarLuciernaga(luciernagas[i],container, i, history, errore)
+	}
 
 }
 
-function mostrarLuciernaga(luc, container, i, history){
+function mostrarLuciernaga(luc, container, i, history, color){
 
 	var op1 = readOp1(true);
 	var op2 = readOp2(true);
@@ -51,20 +54,28 @@ function mostrarLuciernaga(luc, container, i, history){
 
 		var porError = error(luc);
 
+		var optimus =  'blue-grey darken-1 white-text';
+
+		var optimuss= 'white-text';
+
+		if (color)  {optimuss = 'optimus' ;optimus = 'optimus';}
+
+		var white;
+
 		var moo = '';
 
-		if (history) moo = '<a class="modal-trigger" href="#modal'+i+'" style="float: right;color: white"><i class="tiny material-icons">book</i></a>'
+		if (history) moo = '<a class="modal-trigger '+optimus+'" href="#modal'+i+'" style="float: right;"><i class="tiny material-icons">book</i></a>'
 
 		var html = '<div class="col s3">\
-						<div class="card blue-grey darken-1">\
-							<div class="card-content white-text">\
-								<img src="css/firefly.png">\
+						<div class="card '+optimus+'">\
+							<div class="card-content">\
+								<i class="material-icons" style="font-size: large;">adb</i>\
 									<span class="card-title">'+nameLuciernagas[i]+'<sub>['+i+']</sub></span>'+moo+'\
 									<br>\
 									'+textop1+'<span style="float: left;">+</span>\
 									'+textop2+'<div class="divider"></div>'+textres+'</div>\
 									<div class="divider"></div>\
-									<div class="bright card-content white-text">\
+									<div class="bright card-content">\
 										<div class="rbright row">\
 											<div class="col s2" id="brighticon">\
 											<i style="float: left;" class="tiny material-icons">brightness_5</i>\
@@ -151,15 +162,15 @@ function showHistory(luc1,luc2,dist,heter,luc2beforemuted,i,j,k){
 
 	appendCiclo(k,container);
 
-	mostrarLuciernaga(luc2beforemuted,container,j, false);
+	mostrarLuciernaga(luc2beforemuted,container,j, false, false);
 
 	appendTrending(dist,container);
 
-	mostrarLuciernaga(luc1,container,i, false);
+	mostrarLuciernaga(luc1,container,i, false, false);
 
 	appendShuffle(heter,container);
 
-	mostrarLuciernaga(luc2,container,j, false);
+	mostrarLuciernaga(luc2,container,j, false, false);
 
 }
 
