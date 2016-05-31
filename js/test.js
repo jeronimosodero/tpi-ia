@@ -8,7 +8,7 @@ function acercar(paso,toler, luciernagas, i, j){
 	if (max > dist) max = dist;
 	if (min < 0) min = 0;
 
-	//console.log("min: ",min," max: ",max)
+	
 	var luc2t;
 	
 	for (var x in luciernagas[j]) {
@@ -16,10 +16,6 @@ function acercar(paso,toler, luciernagas, i, j){
 		luc2t = jQuery.extend({}, luciernagas[j]);
 	
 		if (luciernagas[j][x] != luciernagas[i][x]) {
-
-			//console.log("luciernaga antes (",error(luciernagas[j]),") : ");
-			//consoleLuc(luciernagas[j]);
-
 
 		var resg = luciernagas[j][x];
 				
@@ -32,32 +28,24 @@ function acercar(paso,toler, luciernagas, i, j){
 		var newDist = distanciaManhattan(luciernagas[i],luciernagas[j]);
 		
 
-		//console.log("newDist: ",newDist," dist: ", dist)
 		if ((newDist >= (dist-max)) && (newDist < (dist-min))) break;
 		
-		if ((newDist >= dist) || (newDist < (dist-max))){ 
-			//console.log("callback");
-			luciernagas[j] = luc2t ;luc2t= null	
-		} else {
-			//console.log("luciernaga dsp(sin callback) (",error(luciernagas[j]),") : ");
-			consoleLuc(luciernagas[j])
-		}
+		if ((newDist >= dist) || (newDist < (dist-max))){			
+			luciernagas[j] = luc2t;
+			luc2t= null	
+		} 
 		
-;
-	}else {
-		//console.log("no entra")
-	}
-
+		}
 	} 
 
-
+/*
 	console.log("paso: ", paso);
 	console.log("distancia inicial: ",dist);
 	console.log("distancia final: ",distanciaManhattan(luciernagas[i],luciernagas[j]));
 	console.log("diferencia",dist-distanciaManhattan(luciernagas[i],luciernagas[j]));
 	console.log("luciernaga movida (",error(luciernagas[j]),") : ");
 	consoleLuc(luciernagas[j]);
-	
+	*/
 
 	
 	return (dist-distanciaManhattan(luciernagas[i],luciernagas[j]));

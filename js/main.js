@@ -52,10 +52,6 @@ function checkInput(){
 		}
 	}
 
-	if (operador1 == "COMO" && operador2 == "HACES" && resultado == "ESTO"){
-		Materialize.toast('q se yo no soy 100tifiko', 4000);
-		return false;
-	}
 
 
 	if (unicos.length > 10){
@@ -249,7 +245,7 @@ function FA(luciernagas){
 	var dist;
 	var luc2res;
 	
-	while (checkErrors(luciernagas) && k< MAX_GEN && otracosa(luciernagas)) {
+	while (checkErrors(luciernagas) && k< MAX_GEN/* && otracosa(luciernagas)*/) {
 		
 		for (var i = 0; i < initialPopulation; i++) {
 
@@ -260,33 +256,22 @@ function FA(luciernagas){
 					
 					
 
-				console.log("-----------------------------------------------");
+				/*console.log("-----------------------------------------------");
 				console.log("luciernaga (quieta)",i," (",error(luciernagas[i]),")");
 				consoleLuc(luciernagas[i]);	
 				console.log("luciernaga (mueve)",j," (",error(luciernagas[j]),")");
-				consoleLuc(luciernagas[j]);	
+				consoleLuc(luciernagas[j]);	*/
 
 				dist = acercar(Math.trunc(distanciaManhattan(luciernagas[i],luciernagas[j])*attractiveness),tolerancia,luciernagas,i,j);
 				
 				
 
-				console.log("heter: ", heter);
-				//random(luciernagas,heter, j);
-				console.log("luciernaga mutada (",error(luciernagas[j]),"): ");
-				consoleLuc(luciernagas[j]); 
+				/*console.log("heter: ", heter);*/
+				random(luciernagas,error(luciernagas[j]), j);
+				/*console.log("luciernaga mutada (",error(luciernagas[j]),"): ");
+				consoleLuc(luciernagas[j]); */
 				//showHistory(luciernagas[i],luciernagas[j],dist,heter,luc2res,i,j,k);
-				}/*else if( i != j && error(luciernagas[i])==error(luciernagas[j])){
-					console.log("error igual");
-
-				console.log("luciernaga antes de mutar cuando es igual",j," (",error(luciernagas[j]),")");
-				consoleLuc(luciernagas[j]);
-
-					random(luciernagas,2, j);
-					showHistory(luciernagas[i],luciernagas[j],5987,2,luc2res,i,j,k);
-					console.log("luciernaga despues de mutar cuando es igual",j," (",error(luciernagas[j]),")");
-				consoleLuc(luciernagas[j]);
-				}*/
-
+				}
 
 			}
 
@@ -301,12 +286,12 @@ function FA(luciernagas){
 	return luciernagas;
 }
 
-function otracosa(luciernagas){
+function todoiguale(luciernagas){
 	var c = error(luciernagas[0]);
 	for (var i = 0; i < luciernagas.length; i++) {
-		if (error(luciernagas[i])!=c) return true
+		if (error(luciernagas[i])!=c) return false
 	};
-return false
+return true
 }
 
 
