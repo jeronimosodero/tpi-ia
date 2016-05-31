@@ -1,19 +1,26 @@
 function acercar(paso,toler, luciernagas, i, j){
-	var min = paso + toler;
-	var max = paso - toler;
-
-	if (max < 0) max = paso;
+	var min = paso - toler;
+	var max = paso + toler;
+	//console.log("min: ",min," max: ",max)
+	
 
 	var dist = distanciaManhattan(luciernagas[i],luciernagas[j]);
+	if (max > dist) max = dist;
+	if (min < 0) min = 0;
 
+	//console.log("min: ",min," max: ",max)
 	var luc2t;
 	
 	for (var x in luciernagas[j]) {
 		
 		luc2t = jQuery.extend({}, luciernagas[j]);
-	////console.log("luciernaga original (",error(luc2),") : ");
-	//consoleLuc(luc2);
+	
 		if (luciernagas[j][x] != luciernagas[i][x]) {
+
+			//console.log("luciernaga antes (",error(luciernagas[j]),") : ");
+			//consoleLuc(luciernagas[j]);
+
+
 		var resg = luciernagas[j][x];
 				
 		var ind = searchbyNum(luciernagas[j],luciernagas[i][x])
@@ -24,24 +31,32 @@ function acercar(paso,toler, luciernagas, i, j){
 
 		var newDist = distanciaManhattan(luciernagas[i],luciernagas[j]);
 		
+
+		//console.log("newDist: ",newDist," dist: ", dist)
 		if ((newDist >= (dist-max)) && (newDist < (dist-min))) break;
 		
 		if ((newDist >= dist) || (newDist < (dist-max))){ 
 			//console.log("callback");
 			luciernagas[j] = luc2t ;luc2t= null	
+		} else {
+			//console.log("luciernaga dsp(sin callback) (",error(luciernagas[j]),") : ");
+			consoleLuc(luciernagas[j])
 		}
 		
-
+;
+	}else {
+		//console.log("no entra")
 	}
-	}
+
+	} 
 
 
-
-	//console.log("distancia inicial: ",dist);
-	//console.log("distancia final: ",distanciaManhattan(luciernagas[i],luciernagas[j]));
-	//console.log("diferencia",dist-distanciaManhattan(luciernagas[i],luciernagas[j]));
-	//console.log("luciernaga movida (",error(luciernagas[j]),") : ");
-	//consoleLuc(luciernagas[j]);
+	console.log("paso: ", paso);
+	console.log("distancia inicial: ",dist);
+	console.log("distancia final: ",distanciaManhattan(luciernagas[i],luciernagas[j]));
+	console.log("diferencia",dist-distanciaManhattan(luciernagas[i],luciernagas[j]));
+	console.log("luciernaga movida (",error(luciernagas[j]),") : ");
+	consoleLuc(luciernagas[j]);
 	
 
 	
@@ -63,7 +78,7 @@ function heterogeneidad(luciernagas){
 	return c
 }
 
-function mutar(luciernagas,heter,j){
+function random(luciernagas,heter,j){
 
 	var vic1=0;
 	var indvic1;
