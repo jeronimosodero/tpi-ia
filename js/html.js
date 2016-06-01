@@ -195,3 +195,14 @@ function modalsDisplay(){
 }
 
 
+function changeOperator(){
+
+	if (document.getElementById("operator").getElementsByTagName("i")[0].innerHTML=="add"){
+		document.getElementById("operator").getElementsByTagName("i")[0].innerHTML="remove";
+	} else if (document.getElementById("operator").getElementsByTagName("i")[0].innerHTML=="remove"){
+		document.getElementById("operator").getElementsByTagName("i")[0].innerHTML="add";
+	}
+
+
+}
+

@@ -90,3 +90,15 @@
 .optimus {
     color: #787878 !important;
 }
+
+#operator {
+    width: 37px;
+}
+
+#operator .material-icons {
+    color: #757575;
+}
+
+.input-field .prefix.active{
+    color: white !important;
+}

@@ -10,7 +10,11 @@ function update(){
 
 function run(){
 
+	$("#poblacionfinal").remove();
+
 	agregarPad();
+
+
 	
 
 	if (checkInput()) {
@@ -29,10 +33,12 @@ $('.modal-trigger').leanModal();
 function scrollDown(element){
 	$('html, body').animate({
          scrollTop: $(element).offset().top
-    }, 2000);
+    }, 1000);
 
     
  }
+
+
 
 function checkInput(){
 
@@ -121,6 +127,10 @@ function readRes(way){
 		else return input.split("").reverse().join("");
 }
 
+function readOperator(){
+	return document.getElementById("operator").getElementsByTagName("i")[0].innerHTML
+}
+
 function generarLuciernagas(){
 
 	var operador1 = readOp1(false);
@@ -206,7 +216,12 @@ function error(luc){
 	var op1 = readOp1(true);
 	var op2 = readOp2(true);
 	var res = readRes(true);
-	var error = Math.abs(toNumber(luc,res)-(toNumber(luc,op1)+toNumber(luc,op2)));
+	var operator = readOperator();
+
+	var error;
+
+	if (operator == "add") error = Math.abs(toNumber(luc,res)-(toNumber(luc,op1)+toNumber(luc,op2)));
+	if (operator == "remove") error = Math.abs(toNumber(luc,res)-(toNumber(luc,op1)-toNumber(luc,op2)));
 	var suma=0;
 	var errorString = error.toString();
 	for (var i = 0; i < errorString.length; i++) {
@@ -262,16 +277,21 @@ function FA(luciernagas){
 				console.log("luciernaga (mueve)",j," (",error(luciernagas[j]),")");
 				consoleLuc(luciernagas[j]);	*/
 
-				dist = acercar(Math.trunc(distanciaManhattan(luciernagas[i],luciernagas[j])*attractiveness),tolerancia,luciernagas,i,j);
+				dist = acercar(Math.ceil(distanciaManhattan(luciernagas[i],luciernagas[j])*attractiveness),tolerancia,luciernagas,i,j);
 				
 				
 
 				/*console.log("heter: ", heter);*/
-				random(luciernagas,error(luciernagas[j]), j);
+				random(luciernagas,Math.ceil(error(luciernagas[j])/4), j);
+
 				/*console.log("luciernaga mutada (",error(luciernagas[j]),"): ");
 				consoleLuc(luciernagas[j]); */
 				//showHistory(luciernagas[i],luciernagas[j],dist,heter,luc2res,i,j,k);
 				}
+
+				if (todoiguales(luciernagas)) {
+					random(luciernagas[0],1,1);
+					console.log("se trabo");}
 
 			}
 
@@ -280,13 +300,13 @@ function FA(luciernagas){
 		
 
 		k++;
-		
+		console.clear();
 		console.log("ciclo:", k);
 	}
 	return luciernagas;
 }
 
-function todoiguale(luciernagas){
+function todoiguales(luciernagas){
 	var c = error(luciernagas[0]);
 	for (var i = 0; i < luciernagas.length; i++) {
 		if (error(luciernagas[i])!=c) return false
