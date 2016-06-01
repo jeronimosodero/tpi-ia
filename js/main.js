@@ -245,6 +245,9 @@ function FA(luciernagas){
 	var dist;
 	var luc2res;
 	
+	var cantRandom = 0;
+	var cantTodosIguales = 0;
+	var errorIgual = 0;
 	while (checkErrors(luciernagas) && k< MAX_GEN/* && otracosa(luciernagas)*/) {
 		
 		for (var i = 0; i < initialPopulation; i++) {
@@ -267,12 +270,26 @@ function FA(luciernagas){
 				
 
 				/*console.log("heter: ", heter);*/
-				random(luciernagas,error(luciernagas[j]), j);
+				if(Math.random()<random2){
+					random(luciernagas,Math.ceil(error(luciernagas[j])/2), j);
+				}
 				/*console.log("luciernaga mutada (",error(luciernagas[j]),"): ");
 				consoleLuc(luciernagas[j]); */
 				//showHistory(luciernagas[i],luciernagas[j],dist,heter,luc2res,i,j,k);
+				}else if(i != j && error(luciernagas[i])==error(luciernagas[j])){
+					errorIgual++;
+					if(Math.random()<random1){
+						cantRandom++;
+						random(luciernagas,Math.ceil(Math.random()*4),j);
+					}
 				}
 
+				if(todoiguale(luciernagas)){
+					for(var t = 1; t<initialPopulation;t++){
+						cantTodosIguales++;
+						random(luciernagas,2,t);
+					}
+				}
 			}
 
 		}
@@ -283,6 +300,9 @@ function FA(luciernagas){
 		
 		console.log("ciclo:", k);
 	}
+	console.log("errorIgual: "+errorIgual);
+	console.log("cantRandom: " + cantRandom);
+	console.log("cantTodosIguales: "+ cantTodosIguales);
 	return luciernagas;
 }
 
