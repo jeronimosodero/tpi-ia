@@ -66,7 +66,7 @@ function mostrarLuciernaga(luc, container, i, history, color){
 
 		if (history) moo = '<a class="modal-trigger '+optimus+'" href="#modal'+i+'" style="float: right;"><i class="tiny material-icons">book</i></a>'
 
-		var html = '<div class="col s3">\
+		var html = '<div class="col l3 s12 m6">\
 						<div class="card '+optimus+'">\
 							<div class="card-content">\
 								<i class="material-icons" style="font-size: large;">adb</i>\
