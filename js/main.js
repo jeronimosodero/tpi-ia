@@ -211,8 +211,41 @@ function exists(luciernaga, nro) {
 	return  error;
 }*/
 
+function errorArray(luc){
+	var op1 = readOp1(true);
+	var op2 = readOp2(true);
+	var res = readRes(true);
+	var operator = readOperator();
+	
+	var error;
+
+	var array = [];
+
+	if (operator == "add") error = Math.abs(toNumber(luc,res)-(toNumber(luc,op1)+toNumber(luc,op2)));
+	if (operator == "remove") error = Math.abs(toNumber(luc,res)-(toNumber(luc,op1)-toNumber(luc,op2)));
+	var suma=0;
+		
+	for (var i = 0; i < res.length; i++) {
+		array.unshift(Math.floor(error/Math.pow(10,i)) % 10);
+	};
+
+	
+	return array;
+}
 
 function error(luc){
+	
+	var error = errorArray(luc);
+	var suma = 0;
+
+	for (var i = 0; i < error.length; i++) {
+		suma+=error[i];
+	};
+	
+	return suma;
+}
+
+/*function error(luc){
 	var op1 = readOp1(true);
 	var op2 = readOp2(true);
 	var res = readRes(true);
@@ -231,7 +264,7 @@ function error(luc){
 	////console.log(error);
 	
 	return suma;
-}
+}*/
 
 function toNumber(luc,op){
 	var res = "";
@@ -259,6 +292,15 @@ function FA(luciernagas){
 	var heter;
 	var dist;
 	var luc2res;
+
+
+	var cont = [];
+	var errores = [];
+
+	for (var i = 0; i < luciernagas.length; i++) {
+		cont[i]=0;
+		errores[i]=error(luciernagas[i]);
+	};
 	
 	var cantRandom = 0;
 	var cantTodosIguales = 0;
@@ -293,6 +335,11 @@ function FA(luciernagas){
 					random(luciernagas,Math.ceil(error(luciernagas[j])/2), j);
 				}
 
+				cont[i]++;
+				console.log(j, "->",i,cont,errores);
+				errores[j]=error(luciernagas[j]);
+				cont[j]=0;
+
 				/*console.log("luciernaga mutada (",error(luciernagas[j]),"): ");
 				consoleLuc(luciernagas[j]); */
 				//showHistory(luciernagas[i],luciernagas[j],dist,heter,luc2res,i,j,k);
@@ -317,14 +364,19 @@ function FA(luciernagas){
 					}
 				}
 
+			
+				
+				maxLoc(cont,20,luciernagas);
+
+
 			}
 
 		}
 
-		
+		 //console.log(cont);
 
 		k++;
-		console.clear();
+		
 		console.log("ciclo:", k);
 	}
 	console.log("errorIgual: "+errorIgual);
@@ -350,6 +402,20 @@ return true
 }
 
 
+function maxLoc(cont,max,luciernagas){
+
+	for (var i = 0; i < cont.length; i++) {
+		if (cont[i]>max /*&& errorArray(luciernagas[i])[0]!=0*/) {
+			console.log("entro",cont[i]);
+			console.log(errorArray(luciernagas[i])[0]);
+			cont[i]=0;
+
+			random(luciernagas,error(luciernagas[i]),i);
+			//errores[i]=error(luciernagas[i])
+		}
+	};
+
+}
 
 
 
