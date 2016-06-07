@@ -234,7 +234,7 @@ function errorArray(luc){
 	
 	return array;
 }
-
+/*
 function error(luc){
 	
 	var error = errorArray(luc);
@@ -245,9 +245,9 @@ function error(luc){
 	};
 	
 	return suma;
-}
+}*/
 
-/*function error(luc){
+function error(luc){
 	var op1 = readOp1(true);
 	var op2 = readOp2(true);
 	var res = readRes(true);
@@ -262,11 +262,8 @@ function error(luc){
 	for (var i = 0; i < errorString.length; i++) {
 		suma+=parseInt(errorString[i]);
 	};
-	////console.log(toNumber(luc,res)+":"+toNumber(luc,op1)+":"+toNumber(luc,op2));
-	////console.log(error);
-	
 	return suma;
-}*/
+}
 
 function toNumber(luc,op){
 	var res = "";
@@ -304,9 +301,7 @@ function FA(luciernagas){
 		errores[i]=error(luciernagas[i]);
 	};
 	
-	var cantRandom = 0;
 	var cantTodosIguales = 0;
-	var errorIgual = 0;
 	while (checkErrors(luciernagas) && k< MAX_GEN/* && otracosa(luciernagas)*/) {
 		
 		for (var i = 0; i < initialPopulation; i++) {
@@ -330,12 +325,13 @@ function FA(luciernagas){
 
 				/*console.log("heter: ", heter);*/
 
-				random(luciernagas,Math.ceil(error(luciernagas[j])/4), j);
+				//random(luciernagas,Math.ceil(error(luciernagas[j])/4), j);
 
 
 				if(Math.random()<random2){
 					random(luciernagas,Math.ceil(error(luciernagas[j])/2), j);
 				}
+				
 
 				cont[i]++;
 				//console.log(j, "->",i,cont,errores);
@@ -346,9 +342,7 @@ function FA(luciernagas){
 				consoleLuc(luciernagas[j]); */
 				//showHistory(luciernagas[i],luciernagas[j],dist,heter,luc2res,i,j,k);
 				}else if(i != j && error(luciernagas[i])==error(luciernagas[j])){
-					errorIgual++;
 					if(Math.random()<random1){
-						cantRandom++;
 						random(luciernagas,Math.ceil(Math.random()*4),j);
 					}
 				}
@@ -382,10 +376,7 @@ function FA(luciernagas){
 		console.log("ciclo:", k);
 	}
 
-
-	console.log("errorIgual: "+errorIgual);
-	console.log("cantRandom: " + cantRandom);
-	console.log("cantTodosIguales: "+ cantTodosIguales);
+	
 
 	console.log("promedio final: ",promedio/contar);
 	return luciernagas;
