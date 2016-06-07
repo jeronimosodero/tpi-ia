@@ -1,20 +1,40 @@
-function acercar(paso,toler, luciernagas, i, j){
-	var min = paso - toler;
-	var max = paso + toler;
-	//console.log("min: ",min," max: ",max)
+
+var promedio=0;
+var contar=0;
+
+
+function acercar(max,luciernagas,i,j){
+	var nanana;
+	contar++;
 	
 
 	var dist = distanciaManhattan(luciernagas[i],luciernagas[j]);
-	if (max > dist) max = dist;
-	if (min < 0) min = 0;
+	console.log("--------------------------------")
 
-	
+	console.log("distancia antes:",dist);
+/*	console.log("luciernaga que se queda quieta:");
+	consoleLuc(luciernagas[i]);
+	console.log("luciernaga que se mueve:");
+	consoleLuc(luciernagas[j]);*/
+
+	console.log("max: ",max);
+	/*console.log("paso: ",paso);
+	console.log("toler: ", toler);
+	console.log("min: ", min, " max: ", max);*/
+	//console.log(" dist-max: ", dist-max);
 	var luc2t;
-	
+	var distmovile;
+
 	for (var x in luciernagas[j]) {
 		
+		dismovile= distanciaManhattan(luciernagas[i],luciernagas[j]);
 		luc2t = jQuery.extend({}, luciernagas[j]);
-	
+		/*console.log("ciclo en ",x);
+		console.log("referencia luciernaga que se queda quieta");
+		consoleLuc(luciernagas[i]);
+		consoleLuc(luciernagas[j]);*/
+
+
 		if (luciernagas[j][x] != luciernagas[i][x]) {
 
 		var resg = luciernagas[j][x];
@@ -24,19 +44,31 @@ function acercar(paso,toler, luciernagas, i, j){
 		luciernagas[j][x]=luciernagas[i][x];
 
 		if (ind) luciernagas[j][ind] = resg;
+		//console.log("movimiento");
+		//consoleLuc(luciernagas[j]);
 
 		var newDist = distanciaManhattan(luciernagas[i],luciernagas[j]);
-		
+		//console.log(x,"nueva distancia",newDist)
 
-		if ((newDist >= (dist-max)) && (newDist < (dist-min))) break;
+		if (newDist == (dist-max)) {/*console.log("break")*/;break};
 		
-		if ((newDist >= dist) || (newDist < (dist-max))){			
+		if ((newDist >= distmovile) || (newDist < (dist-max))){			
 			luciernagas[j] = luc2t;
-			luc2t= null	
+			luc2t= null	;
+			//console.log("callback");
+			//consoleLuc(luciernagas[j]);
+			
 		} 
 		
 		}
 	} 
+
+
+	
+	console.log("distancia despues:",(distanciaManhattan(luciernagas[i],luciernagas[j])));
+	console.log("diferencia: ",(dist-distanciaManhattan(luciernagas[i],luciernagas[j])))
+
+	
 
 /*
 	console.log("paso: ", paso);
@@ -46,11 +78,97 @@ function acercar(paso,toler, luciernagas, i, j){
 	console.log("luciernaga movida (",error(luciernagas[j]),") : ");
 	consoleLuc(luciernagas[j]);
 	*/
+	nanana=(max-(dist-distanciaManhattan(luciernagas[i],luciernagas[j])));
+	console.log("nanana: ", nanana);
+	promedio+=nanana;
+	console.log("cont: ",contar," prom: ",promedio);
+	return (dist-distanciaManhattan(luciernagas[i],luciernagas[j]));
+}
+/*
+
+function acercar(paso,toler, luciernagas, i, j){
+	var min = paso - toler;
+	var max = paso + toler;
+	//console.log("min: ",min," max: ",max)
+	
+
+	var dist = distanciaManhattan(luciernagas[i],luciernagas[j]);
+	//console.log("--------------------------------")
+
+	console.log("distancia antes:",dist);
+	console.log("luciernaga que se mueve:");
+	consoleLuc(luciernagas[j]);
+	console.log("luciernaga que se queda quieta:");
+	consoleLuc(luciernagas[i]);
+	if (max > dist) max = dist;
+	if (min < 0) min = 0;
+	
+	console.log("paso: ",paso);
+	console.log("toler: ", toler);
+	console.log("min: ", min, " max: ", max);
+	console.log("dist-min: ", dist-min, " dist-max: ", dist-max);
+	var luc2t;
+
+
+	lucres = jQuery.extend({}, luciernagas[j]);
+	
+	for (var x in luciernagas[j]) {
+		
+		luc2t = jQuery.extend({}, luciernagas[j]);
+		//console.log("ciclo en ",x);
+		//console.log("referencia");
+		//consoleLuc(luciernagas[i]);
+		//consoleLuc(luciernagas[j]);
+
+
+
+		if (luciernagas[j][x] != luciernagas[i][x]) {
+
+		var resg = luciernagas[j][x];
+				
+		var ind = searchbyNum(luciernagas[j],luciernagas[i][x])
+		
+		luciernagas[j][x]=luciernagas[i][x];
+
+		if (ind) luciernagas[j][ind] = resg;
+		//console.log("movimiento");
+		//consoleLuc(luciernagas[j]);
+
+		var newDist = distanciaManhattan(luciernagas[i],luciernagas[j]);
+		//console.log(x,"nueva distancia",newDist)
+
+		if ((newDist >= (dist-max)) && (newDist <= (dist-min))) {console.log("break");break};
+		
+		if ((newDist >= dist) || (newDist < (dist-max))){			
+			luciernagas[j] = luc2t;
+			luc2t= null	;
+			//console.log("callback");
+			//consoleLuc(luciernagas[j]);
+			
+		} 
+		
+		}
+	} 
+
+
+	if ((distanciaManhattan(luciernagas[i],luciernagas[j])) > (dist-min)) {console.log("se movio pero no quedo en el rango")}
+	//console.log("distancia despues:",(distanciaManhattan(luciernagas[i],luciernagas[j])));
+	//console.log("diferencia: ",(dist-distanciaManhattan(luciernagas[i],luciernagas[j])))
+
+	if ((dist-distanciaManhattan(luciernagas[i],luciernagas[j]))==0) console.log("no se movio");
+
+
+	console.log("paso: ", paso);
+	console.log("distancia inicial: ",dist);
+	console.log("distancia final: ",distanciaManhattan(luciernagas[i],luciernagas[j]));
+	console.log("diferencia",dist-distanciaManhattan(luciernagas[i],luciernagas[j]));
+	console.log("luciernaga movida (",error(luciernagas[j]),") : ");
+	consoleLuc(luciernagas[j]);
+	
 
 	
 	return (dist-distanciaManhattan(luciernagas[i],luciernagas[j]));
-}
-
+}*/
 function heterogeneidad(luciernagas){
 	var c=0;
 

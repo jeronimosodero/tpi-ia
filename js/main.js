@@ -18,11 +18,13 @@ function run(){
 	
 
 	if (checkInput()) {
+
 		var luciernagas = generarLuciernagas();
 		modalsDisplay();
 
 		mostrarLuciernagas(FA(luciernagas),'#pobfin',true);
 		scrollDown('#poblacionfinal');
+
 	}
 
 $('.modal-trigger').leanModal();
@@ -322,7 +324,7 @@ function FA(luciernagas){
 				console.log("luciernaga (mueve)",j," (",error(luciernagas[j]),")");
 				consoleLuc(luciernagas[j]);	*/
 
-				dist = acercar(Math.ceil(distanciaManhattan(luciernagas[i],luciernagas[j])*attractiveness),tolerancia,luciernagas,i,j);
+				dist = acercar(Math.ceil(distanciaManhattan(luciernagas[i],luciernagas[j])*attractiveness),luciernagas,i,j);
 				
 				
 
@@ -336,7 +338,7 @@ function FA(luciernagas){
 				}
 
 				cont[i]++;
-				console.log(j, "->",i,cont,errores);
+				//console.log(j, "->",i,cont,errores);
 				errores[j]=error(luciernagas[j]);
 				cont[j]=0;
 
@@ -379,9 +381,13 @@ function FA(luciernagas){
 		
 		console.log("ciclo:", k);
 	}
+
+
 	console.log("errorIgual: "+errorIgual);
 	console.log("cantRandom: " + cantRandom);
 	console.log("cantTodosIguales: "+ cantTodosIguales);
+
+	console.log("promedio final: ",promedio/contar);
 	return luciernagas;
 }
 
@@ -406,8 +412,8 @@ function maxLoc(cont,max,luciernagas){
 
 	for (var i = 0; i < cont.length; i++) {
 		if (cont[i]>max /*&& errorArray(luciernagas[i])[0]!=0*/) {
-			console.log("entro",cont[i]);
-			console.log(errorArray(luciernagas[i])[0]);
+			//console.log("entro",cont[i]);
+			//console.log(errorArray(luciernagas[i])[0]);
 			cont[i]=0;
 
 			random(luciernagas,error(luciernagas[i]),i);
