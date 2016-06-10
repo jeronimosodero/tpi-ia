@@ -1,3 +1,5 @@
+ 
+
   $(document).ready(function(){
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal-trigger').leanModal();
@@ -5,8 +7,6 @@
 	document.getElementById("initialPopulation").setAttribute("value", initialPopulation);
 	document.getElementById("maxgen").setAttribute("value", MAX_GEN);
 	document.getElementById("attrac").setAttribute("value", attractiveness);
-	document.getElementById("toler").setAttribute("value", tolerancia);
-
   });
 
 function mostrarLuciernagas(luciernagas, container, history){
@@ -20,9 +20,12 @@ function mostrarLuciernagas(luciernagas, container, history){
 
 function mostrarLuciernaga(luc, container, i, history, color){
 
+
+
 	var op1 = readOp1(true);
 	var op2 = readOp2(true);
 	var res = readRes(true);
+	var operator = readOperator();
 
 		var textop1 = '<p style="text-align: right;"> '
 		var textop2 = '<p style="text-align: right;"> '
@@ -52,6 +55,11 @@ function mostrarLuciernaga(luc, container, i, history, color){
 		};
 		textres += '</p>';
 
+		var operation;
+
+		if (operator == "add") operation = "+";
+		if (operator == "remove") operation = "-";
+
 		var porError = error(luc);
 
 		var optimus =  'blue-grey darken-1 white-text';
@@ -72,7 +80,7 @@ function mostrarLuciernaga(luc, container, i, history, color){
 								<i class="material-icons" style="font-size: large;">adb</i>\
 									<span class="card-title">'+nameLuciernagas[i]+'<sub>['+i+']</sub></span>'+moo+'\
 									<br>\
-									'+textop1+'<span style="float: left;">+</span>\
+									'+textop1+'<span style="float: left;">'+operation+'</span>\
 									'+textop2+'<div class="divider"></div>'+textres+'</div>\
 									<div class="divider"></div>\
 									<div class="bright card-content">\

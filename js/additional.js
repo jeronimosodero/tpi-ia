@@ -77,12 +77,3 @@ function searchbyNum(luc,value){
 	};
 	return false;
 }
-
-function consoleLuc(luc){
-	var string = "{";
-	for (var x in luc){
-		string += x +": " +luc[x] + ", ";
-	};
-	string+= "}";
-	console.log(string);
-}

@@ -1,13 +1,14 @@
 var nameLuciernagas = [];
 
 function update(){
-	initialPopulation = document.getElementById("initialPopulation").value;
-	MAX_GEN = document.getElementById("maxgen").value;
-	attractiveness = document.getElementById("attrac").value;	
-	tolerancia = document.getElementById("toler").value;
+	initialPopulation = parseInt(document.getElementById("initialPopulation").value);
+	MAX_GEN = parseInt(document.getElementById("maxgen").value);
+	attractiveness = parseFloat(document.getElementById("attrac").value);	
+	randomness = parseInt(document.getElementById("ale").value);
 }
 
 function run(){
+
 
 	$("#poblacionfinal").remove();
 	agregarPad();
@@ -20,6 +21,7 @@ function run(){
 	}
 	$('.modal-trigger').leanModal();
 }
+
 
 function generarLuciernagas(){
 
@@ -120,7 +122,7 @@ function FA(luciernagas){
 			}
 		}
 		k++;
-		console.log("ciclo:", k);
+		//console.log("ciclo:", k);
 	}
 	return luciernagas;
 }

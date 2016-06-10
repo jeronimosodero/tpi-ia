@@ -112,42 +112,27 @@
 
 
 
-  <div id="settings" class="modal modal-fixed-footer">
+  <div id="settings" class="modal modal-fixed-footer" style="max-height: 80%;height: 74%;">
     
     <div class="modal-content">
       <h4>Configuración</h4>
 <form>
       <div class="row">
-    <div class="input-field col s5">
-      <input value="81" id="initialPopulation" type="number" class="validate">
+    <div class="input-field col s12">
+      <input value="8" id="initialPopulation" type="number" class="validate">
       <label class="active" for="initialPopulation">Poblacion Inicial</label>
     </div>
-    
-    <div class="input-field col s5 offset-s2">
-      <input value="5" id="toler" type="number" class="validate">
-      <label class="active" for="toler">Tolerancia</label>
-    </div>
-  </div>
-  <div class="row">
-    <div class="input-field col s5">
-      <input value="1020" id="maxgen" type="number" class="validate">
+    <div class="input-field col s12">
+      <input value="1000" id="maxgen" type="number" class="validate">
       <label class="active" for="maxgen">Máximo de Ciclos</label>
     </div>
-    
-    <div class="input-field col s5 offset-s2">
-      <input value="38" id="x2" type="number" class="validate">
-      <label class="active" for="x2">x2</label>
-    </div>
-  </div>
-  <div class="row">
-    <div class="input-field col s5">
-      <input value="0" id="attrac" type="number" class="validate" step="0.01">
+    <div class="input-field col s12">
+      <input value="0.5" id="attrac" type="number" class="validate" step="0.1">
       <label class="active" for="attrac">Atractividad</label>
-    </div>
-   
-    <div class="input-field col s5 offset-s2 ">
-      <input value="8" id="x3" type="number" class="validate">
-      <label class="active" for="x3">x3</label>
+    </div>   
+    <div class="input-field col s12">
+      <input value="2" id="ale" type="number" class="validate">
+      <label class="active" for="ale">Aleatoreidad</label>
     </div>
   </div>
 </form>
@@ -220,9 +205,6 @@
   <script src="js/html.js"></script>
   <script src="js/chance.min.js"></script>
   <script src="js/additional.js"></script>
-
-  
-
-
+  <script src="js/test.js"></script>
 </body>
 </html>
