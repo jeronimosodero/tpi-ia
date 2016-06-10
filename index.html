@@ -17,10 +17,10 @@
   <nav class="light-blue lighten-1" role="navigation">
     <div class="nav-wrapper container">
       <ul class="right hide-on-med-and-down">
-        <li><a href="#">Bibliografía</a></li>
+        <li><a href="#">Paper</a></li>
       </ul>
       <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">Bibliografía</a></li>
+        <li><a href="#">Paper</a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
@@ -73,7 +73,7 @@
               
               <div class="input-field">
                  <a id="operator" class="btn-floating btn-small waves-effect waves-light white prefix" onclick="changeOperator()"><i class="material-icons">add</i></a>
-                <!-- <i class="material-icons prefix" style="padding-top: 10px">add</i> -->
+                
                 <input id="operador2" value="MORE" type="text" class="validate" style='text-transform:uppercase; border-bottom: 1px solid white;'>
                 <label for="operador2">Segundo Operador</label>
               </div>
@@ -100,8 +100,6 @@
 
 
 <div id="fireflyfarm">
-
-
 </div>
 
 
@@ -131,8 +129,12 @@
       <label class="active" for="attrac">Atractividad</label>
     </div>   
     <div class="input-field col s12">
-      <input value="2" id="ale" type="number" class="validate">
+      <input value="1" id="ale" type="number" class="validate">
       <label class="active" for="ale">Aleatoreidad</label>
+    </div>
+    <div class="input-field col s12">
+      <input value="50" id="fvm" type="number" class="validate" step="10">
+      <label class="active" for="fvm">Frecuencia visualización de movimientos</label>
     </div>
   </div>
 </form>

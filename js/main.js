@@ -5,12 +5,26 @@ function update(){
 	MAX_GEN = parseInt(document.getElementById("maxgen").value);
 	attractiveness = parseFloat(document.getElementById("attrac").value);	
 	randomness = parseInt(document.getElementById("ale").value);
+	fvm = parseInt(document.getElementById("fvm").value);
+	mpml = parseInt(document.getElementById("mpml").value);
+}
+
+
+function clrscr(){
+	$("#poblacionfinal").remove();
+
+	var container;
+	for (var i = 0; i < initialPopulation; i++) {
+		container = '#modal'+i;
+		$(container).remove();
+	};
+	
 }
 
 function run(){
 
 
-	$("#poblacionfinal").remove();
+	clrscr();
 	agregarPad();
 
 	if (checkInput()) {
@@ -103,18 +117,19 @@ function FA(luciernagas){
 		errores[i]=error(luciernagas[i]);
 	};
 	
-	while (checkErrors(luciernagas) && k< MAX_GEN) {
+	while (checkErrors(luciernagas) && k < MAX_GEN) {
 
 		for (var i = 0; i < initialPopulation; i++) cont[i]++;
 
 		for (var i = 0; i < initialPopulation; i++) {
 			for (var j = 0; j < initialPopulation; j++) {
 				if (error(luciernagas[i])<error(luciernagas[j])){
+				showHistory(luciernagas[i],luciernagas[j],dist,randomness,i,j,k,true);
 				dist = acercar(Math.ceil(distanciaManhattan(luciernagas[i],luciernagas[j])*attractiveness),luciernagas,i,j);
 				random(luciernagas,randomness, j);
 				errores[j]=error(luciernagas[j]);
 				cont[j]=0;
-				//showHistory(luciernagas[i],luciernagas[j],dist,heter,luc2res,i,j,k);
+				showHistory(luciernagas[i],luciernagas[j],dist,randomness,i,j,k,false);
 				}else if(i != j && equals(luciernagas[i],luciernagas[j])){
 					random(luciernagas,randomness,j);
 				}
@@ -133,7 +148,6 @@ function acercar(max,luciernagas,i,j){
 	var distmovile;
 	var c=0;
 do {
-	max=max+c;
 	for (var x in luciernagas[j]) {
 		dismovile= distanciaManhattan(luciernagas[i],luciernagas[j]);
 		luc2t = jQuery.extend({}, luciernagas[j]);
@@ -151,7 +165,7 @@ do {
 			} 
 		}
 	}
-	c=1;
+	max++;
 } while ((dist-distanciaManhattan(luciernagas[i],luciernagas[j]))==0);
 
 	return (dist-distanciaManhattan(luciernagas[i],luciernagas[j]));

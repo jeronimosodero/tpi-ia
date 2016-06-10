@@ -1,7 +1,15 @@
+function test(){
+	testCantLuciernagas();
+	testAtract();
+	testRandomness();
+}
+
+
 function testCantLuciernagas(){
 	var cantidadCorridas = 100;
 	var csvContent = "data:text/csv;charset=utf-8,";
-	for(initialPopulation = 8;initialPopulation<=8;initialPopulation++){
+	csvContent += "Cant. Luciernagas,Promedio Ciclos,PromedioOK,Porcentaje soluciones"+"\r\n";
+	for(initialPopulation = 2;initialPopulation<=40;initialPopulation++){
 		console.log(initialPopulation);
 		var ciclosOK = 0;
 		var ciclos = 0;
@@ -13,7 +21,6 @@ function testCantLuciernagas(){
 				ciclosOK += cicloFin;
 				soluciones++;
 			}
-			console.log(i);
 		};
 		var promedioCiclosOK = ciclosOK / soluciones;
 		var promedioCiclos = ciclos / cantidadCorridas;
@@ -26,6 +33,7 @@ function testCantLuciernagas(){
 function testAtract(){
 	var cantidadCorridas = 100;
 	var csvContent = "data:text/csv;charset=utf-8,";
+	csvContent += "Atractividad,Promedio Ciclos,PromedioOK,Porcentaje soluciones"+"\r\n";
 	attractiveness = 0.1;
 	while(attractiveness<=0.9){
 		console.log(attractiveness);
@@ -39,7 +47,6 @@ function testAtract(){
 				ciclosOK += cicloFin;
 				soluciones++;
 			}
-			console.log(i);
 		};
 		var promedioCiclosOK = ciclosOK / soluciones;
 		var promedioCiclos = ciclos / cantidadCorridas;
@@ -50,9 +57,10 @@ function testAtract(){
 	generarCsv(csvContent);
 }
 
-function testRandomess(){
+function testRandomness(){
 	var cantidadCorridas = 100;
 	var csvContent = "data:text/csv;charset=utf-8,";
+	csvContent += "Aleatoridad,Promedio Ciclos,PromedioOK,Porcentaje soluciones"+"\r\n";
 	for(randomness = 0;randomness<=6;randomness++){
 		console.log(randomness);
 		var ciclosOK = 0;
@@ -65,7 +73,6 @@ function testRandomess(){
 				ciclosOK += cicloFin;
 				soluciones++;
 			}
-			console.log(i);
 		};
 		var promedioCiclosOK = ciclosOK / soluciones;
 		var promedioCiclos = ciclos / cantidadCorridas;
@@ -74,6 +81,7 @@ function testRandomess(){
 	}
 	generarCsv(csvContent);
 }
+
 
 function generarCsv(data){
 	var encodedUri = encodeURI(data);
@@ -116,7 +124,6 @@ function FA2(luciernagas){
 			}
 		}
 		k++;
-		//console.log("ciclo:", k);
 	}
 	return k;
 }

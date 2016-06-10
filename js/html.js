@@ -1,12 +1,9 @@
  
 
   $(document).ready(function(){
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-    $('.modal-trigger').leanModal();
-	
-	document.getElementById("initialPopulation").setAttribute("value", initialPopulation);
-	document.getElementById("maxgen").setAttribute("value", MAX_GEN);
-	document.getElementById("attrac").setAttribute("value", attractiveness);
+
+    $('.modal-trigger').leanModal();	
+
   });
 
 function mostrarLuciernagas(luciernagas, container, history){
@@ -164,13 +161,18 @@ function appendCiclo(ciclo,container){
 		}).appendTo(container)
 }
 
-function showHistory(luc1,luc2,dist,heter,luc2beforemuted,i,j,k){
+function showHistory(luc1,luc2,dist,heter,i,j,k,time){
+
+	if (!isNaN(k%fvm) && (k%fvm)==0){
 
 	var container = '#modalrow'+j;
 
+	if (time){
+
 	appendCiclo(k,container);
 
-	mostrarLuciernaga(luc2beforemuted,container,j, false, false);
+	mostrarLuciernaga(luc2,container,j, false, false);
+	} else {
 
 	appendTrending(dist,container);
 
@@ -179,6 +181,9 @@ function showHistory(luc1,luc2,dist,heter,luc2beforemuted,i,j,k){
 	appendShuffle(heter,container);
 
 	mostrarLuciernaga(luc2,container,j, false, false);
+
+
+}}
 
 }
 
