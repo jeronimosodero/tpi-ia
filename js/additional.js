@@ -39,8 +39,12 @@ function exists(luciernaga, nro) {
 }
 
 function checkErrors(luciernagas){
+	var names = ['Nelson','Jero','Matias'];
+	var select = Math.round(Math.random()*2);
 	for (var i = 0; i < luciernagas.length; i++) {
-		if (error(luciernagas[i])==0) return false
+		if (error(luciernagas[i])==0) {
+			nameLuciernagas[i]=names[select];
+			return false}
 	};
 return true
 }

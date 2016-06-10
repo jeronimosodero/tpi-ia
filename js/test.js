@@ -51,7 +51,7 @@ function testAtract(){
 		var promedioCiclosOK = ciclosOK / soluciones;
 		var promedioCiclos = ciclos / cantidadCorridas;
 		var porcentajeEncontradas = soluciones / cantidadCorridas * 100;
-		csvContent += initialPopulation + "," + promedioCiclos  + "," + promedioCiclosOK + "," + porcentajeEncontradas + "\r\n";
+		csvContent += attractiveness + "," + promedioCiclos  + "," + promedioCiclosOK + "," + porcentajeEncontradas + "\r\n";
 		attractiveness += 0.1;
 	}
 	generarCsv(csvContent);

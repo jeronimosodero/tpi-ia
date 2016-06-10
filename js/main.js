@@ -74,7 +74,7 @@ function generarLuciernagas(){
 			luc[unicos[i]] = nro;
 		}
 		luciernagas.push(luc);
-		nameLuciernagas.push(chance.first());
+		nameLuciernagas[j]=chance.first();
 	}
 	return luciernagas;
 }

@@ -131,8 +131,8 @@ function appendTrending(trending,container){
 		<p>Arrimo</p>';
 
 	$('<div/>', {
-			'class':'col s1',
-			'style': 'text-align: center;margin-top: 50px;',
+			'class':'col s12 l1 rere',
+			//'style': 'text-align: center;margin-top: 50px;',
 			'html': html
 		}).appendTo(container)
 }
@@ -143,8 +143,8 @@ function appendShuffle(shuffle,container){
 		<p>Azar</p>';
 
 	$('<div/>', {
-			'class':'col s1',
-			'style': 'text-align: center;margin-top: 50px;',
+			'class':'col s12 l1 rere',
+			//'style': 'text-align: center;margin-top: 50px;',
 			'html': html
 		}).appendTo(container)
 }
@@ -155,8 +155,8 @@ function appendCiclo(ciclo,container){
 		<p>Ciclo</p>';
 
 	$('<div/>', {
-			'class':'col s1',
-			'style': 'text-align: center;margin-top: 50px;',
+			'class':'col s12 l1 rere',
+			//'style': 'text-align: center;margin-top: 50px;',
 			'html': html
 		}).appendTo(container)
 }
