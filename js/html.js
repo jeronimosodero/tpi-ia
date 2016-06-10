@@ -206,3 +206,70 @@ function changeOperator(){
 
 }
 
+function checkInput(){
+
+	var operador1 = readOp1(true);
+	var operador2 = readOp2(true);
+	var resultado = readRes(true);
+
+	var max;
+
+	var unicos = [];
+	var suma = operador1 + operador2 + resultado;
+
+
+	for (i = 0;i < suma.length; i++) {
+		if(unicos.indexOf(suma[i])==-1){
+			unicos.push(suma[i]);
+		}
+	}
+
+	if (unicos.length > 10){
+		Materialize.toast('Existen mas de 10 caracteres en el problema.', 4000);
+		return false;
+	}
+
+	for (var i = 0; i < unicos.length; i++) {
+		if (isNaN(unicos[i]) == false) {
+			Materialize.toast('Los operadores no puede contener digitos.', 4000);
+			return false;
+		}
+	};
+
+	if (operador1.length > operador2.length) max = operador1
+		else max = operador2;
+
+
+	if (max.length > resultado.length){
+		Materialize.toast('El resultado no tiene los suficientes caracteres', 4000);
+		return false;
+	}
+
+	if (resultado.length > max.length+1){
+		Materialize.toast('El resultado es muy largo', 4000);
+		return false;
+	}
+
+	if (resultado.length == 0){
+		Materialize.toast('El resultado esta vacío', 4000);
+		return false;
+	}
+
+	if (operador1.length == 0){
+		Materialize.toast('El primer operador es vacío', 4000);
+		return false;
+	}
+
+	if (operador2.length == 0){
+		Materialize.toast('El segundo operador es vacío', 4000);
+		return false;
+	}
+
+	return true;
+}
+
+function scrollDown(element){
+	$('html, body').animate({
+         scrollTop: $(element).offset().top
+    }, 1000);
+ }
