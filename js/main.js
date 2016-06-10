@@ -1,5 +1,7 @@
 var nameLuciernagas = [];
 
+
+
 function update(){
 	//console.log("ddds");
 	initialPopulation = document.getElementById("initialPopulation").value;
@@ -18,13 +20,10 @@ function run(){
 	
 
 	if (checkInput()) {
-
 		var luciernagas = generarLuciernagas();
 		modalsDisplay();
-
 		mostrarLuciernagas(FA(luciernagas),'#pobfin',true);
 		scrollDown('#poblacionfinal');
-
 	}
 
 $('.modal-trigger').leanModal();
@@ -304,11 +303,13 @@ function FA(luciernagas){
 	var cantTodosIguales = 0;
 	while (checkErrors(luciernagas) && k< MAX_GEN/* && otracosa(luciernagas)*/) {
 		
+		for (var i = 0; i < initialPopulation; i++) cont[i]++;
+
 		for (var i = 0; i < initialPopulation; i++) {
 
 			for (var j = 0; j < initialPopulation; j++) {
-				heter = heterogeneidad(luciernagas);
-				luc2res = jQuery.extend({}, luciernagas[j]);
+				//heter = heterogeneidad(luciernagas);
+				//luc2res = jQuery.extend({}, luciernagas[j]);
 				if (error(luciernagas[i])<error(luciernagas[j])){
 					
 					
@@ -328,24 +329,29 @@ function FA(luciernagas){
 				//random(luciernagas,Math.ceil(error(luciernagas[j])/4), j);
 
 
-				if(Math.random()<random2){
-					random(luciernagas,Math.ceil(error(luciernagas[j])/2), j);
-				}
+				//if(Math.random()<random2){
+					random(luciernagas,randomness, j);
+				//}
 				
 
-				cont[i]++;
-				//console.log(j, "->",i,cont,errores);
+				
+				//console.log(j, "->",i,cont,errores,"arrimo: ",dist);
+				//console.log("-------------------------------------------------");
 				errores[j]=error(luciernagas[j]);
 				cont[j]=0;
 
 				/*console.log("luciernaga mutada (",error(luciernagas[j]),"): ");
 				consoleLuc(luciernagas[j]); */
 				//showHistory(luciernagas[i],luciernagas[j],dist,heter,luc2res,i,j,k);
-				}else if(i != j && error(luciernagas[i])==error(luciernagas[j])){
-					if(Math.random()<random1){
-						random(luciernagas,Math.ceil(Math.random()*4),j);
-					}
+				}else if(i != j && equals(luciernagas[i],luciernagas[j])){
+
+					//console.log("entrea");
+				//	if(Math.random()<random1){
+						random(luciernagas,randomness,j);
+					//}
 				}
+
+				
 
 
 				/*if (todoiguales(luciernagas)) {
@@ -353,16 +359,16 @@ function FA(luciernagas){
 					console.log("se trabo");}*/
 
 
-				if(todoiguales(luciernagas)){
+		/*		if(todoiguales(luciernagas)){
 					for(var t = 1; t<initialPopulation;t++){
 						cantTodosIguales++;
 						random(luciernagas,2,t);
 					}
 				}
 
-			
+			*/
 				
-				maxLoc(cont,20,luciernagas);
+				maxLoc(cont,errores,4,luciernagas);
 
 
 			}
@@ -370,15 +376,12 @@ function FA(luciernagas){
 		}
 
 		 //console.log(cont);
-
+		
 		k++;
 		
 		console.log("ciclo:", k);
 	}
 
-	
-
-	console.log("promedio final: ",promedio/contar);
 	return luciernagas;
 }
 
@@ -399,7 +402,7 @@ return true
 }
 
 
-function maxLoc(cont,max,luciernagas){
+function maxLoc(cont,errores,max,luciernagas){
 
 	for (var i = 0; i < cont.length; i++) {
 		if (cont[i]>max /*&& errorArray(luciernagas[i])[0]!=0*/) {
@@ -407,7 +410,8 @@ function maxLoc(cont,max,luciernagas){
 			//console.log(errorArray(luciernagas[i])[0]);
 			cont[i]=0;
 
-			random(luciernagas,error(luciernagas[i]),i);
+			random(luciernagas,randomness,i);
+			errores[i]=error(luciernagas[i]);
 			//errores[i]=error(luciernagas[i])
 		}
 	};

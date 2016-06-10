@@ -4,26 +4,34 @@ var contar=0;
 
 
 function acercar(max,luciernagas,i,j){
-	var nanana;
-	contar++;
+	//var nanana;
+	//contar++;
 	
 
 	var dist = distanciaManhattan(luciernagas[i],luciernagas[j]);
-	console.log("--------------------------------")
+	//console.log("--------------------------------")
 
-	console.log("distancia antes:",dist);
+	//console.log("distancia entre ",i," y ",j," antes: ",dist);
 /*	console.log("luciernaga que se queda quieta:");
 	consoleLuc(luciernagas[i]);
 	console.log("luciernaga que se mueve:");
 	consoleLuc(luciernagas[j]);*/
 
-	console.log("max: ",max);
+	/*console.log("max: ",max);
+	console.log("luciernaga ", i);
+	consoleLuc(luciernagas[i]);
+	console.log("luciernaga ", j);
+	consoleLuc(luciernagas[j]);*/
 	/*console.log("paso: ",paso);
 	console.log("toler: ", toler);
 	console.log("min: ", min, " max: ", max);*/
 	//console.log(" dist-max: ", dist-max);
 	var luc2t;
 	var distmovile;
+	var c=0;
+do {
+	max=max+c;
+	//if (c>0) console.log("aumento");
 
 	for (var x in luciernagas[j]) {
 		
@@ -62,11 +70,13 @@ function acercar(max,luciernagas,i,j){
 		
 		}
 	} 
+	c=1;
+} while ((dist-distanciaManhattan(luciernagas[i],luciernagas[j]))==0);
 
 
 	
-	console.log("distancia despues:",(distanciaManhattan(luciernagas[i],luciernagas[j])));
-	console.log("diferencia: ",(dist-distanciaManhattan(luciernagas[i],luciernagas[j])))
+	//console.log("distancia entre ",i," y ",j," despues:",(distanciaManhattan(luciernagas[i],luciernagas[j])));
+	//console.log("diferencia: ",(dist-distanciaManhattan(luciernagas[i],luciernagas[j])))
 
 	
 
@@ -78,10 +88,10 @@ function acercar(max,luciernagas,i,j){
 	console.log("luciernaga movida (",error(luciernagas[j]),") : ");
 	consoleLuc(luciernagas[j]);
 	*/
-	nanana=(max-(dist-distanciaManhattan(luciernagas[i],luciernagas[j])));
-	console.log("nanana: ", nanana);
-	promedio+=nanana;
-	console.log("cont: ",contar," prom: ",promedio);
+	//nanana=(max-(dist-distanciaManhattan(luciernagas[i],luciernagas[j])));
+	//console.log("nanana: ", nanana);
+	//promedio+=nanana;
+	//console.log("cont: ",contar," prom: ",promedio);
 	return (dist-distanciaManhattan(luciernagas[i],luciernagas[j]));
 }
 /*
@@ -186,6 +196,8 @@ function heterogeneidad(luciernagas){
 
 function random(luciernagas,heter,j){
 
+	var iter = Math.ceil(Math.random()*heter);
+
 	var vic1=0;
 	var indvic1;
 	var vic2=0;
@@ -193,7 +205,7 @@ function random(luciernagas,heter,j){
 	var resg=0;
 	var nums;
 
-	for (var i = 0; i < heter; i++) {
+	for (var i = 0; i < iter; i++) {
 		
 		vic1 = Math.trunc(Math.random()*10);
 		

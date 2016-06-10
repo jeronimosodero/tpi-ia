@@ -1,4 +1,7 @@
-var MAX_GEN = 1000;
+var MAX_GEN = 2000;
+
+randomness = 2;
+
 
 
 var initialPopulation = 8;
