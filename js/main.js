@@ -6,7 +6,6 @@ function update(){
 	attractiveness = parseFloat(document.getElementById("attrac").value);	
 	randomness = parseInt(document.getElementById("ale").value);
 	fvm = parseInt(document.getElementById("fvm").value);
-	mpml = parseInt(document.getElementById("mpml").value);
 }
 
 

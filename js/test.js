@@ -8,24 +8,41 @@ function test(){
 function testCantLuciernagas(){
 	var cantidadCorridas = 100;
 	var csvContent = "data:text/csv;charset=utf-8,";
-	csvContent += "Cant. Luciernagas,Promedio Ciclos,PromedioOK,Porcentaje soluciones"+"\r\n";
-	for(initialPopulation = 2;initialPopulation<=40;initialPopulation++){
+	csvContent += "Cant. Luciernagas,Ciclo Menor,Ciclo Mayor,Promedio Ciclos,PromedioOK,Porcentaje soluciones,Tiempo Menor,Tiempo mayor,Promedio Tiempo"+"\r\n";
+	for(initialPopulation = 10;initialPopulation<=10;initialPopulation++){
 		console.log(initialPopulation);
 		var ciclosOK = 0;
 		var ciclos = 0;
 		var soluciones = 0;
+		var timeAcum = 0;
+		var tiempoMayor = 0;
+		var tiempoMenor = 9999999999999;
+		var cicloMenor=MAX_GEN;
+		var cicloMayor=0;
 		for (var i = 0; i < cantidadCorridas; i++) {
+			//var start = new Date().getTime();
+			var start = performance.now();
 			var cicloFin = FA2(generarLuciernagas());
 			ciclos += cicloFin;
 			if(cicloFin != MAX_GEN){
+				//var end = new Date().getTime();
+				var end = performance.now();
+				var time = (end - start);
+				timeAcum += time;
 				ciclosOK += cicloFin;
 				soluciones++;
+				if(time<tiempoMenor) tiempoMenor=time;
+				if(time>tiempoMayor) tiempoMayor=time;
+				if(cicloFin<cicloMenor) cicloMenor=cicloFin;
+				if(cicloFin>cicloMayor) cicloMayor=cicloFin;
+
 			}
 		};
 		var promedioCiclosOK = ciclosOK / soluciones;
 		var promedioCiclos = ciclos / cantidadCorridas;
 		var porcentajeEncontradas = soluciones / cantidadCorridas * 100;
-		csvContent += initialPopulation + "," + promedioCiclos  + "," + promedioCiclosOK + "," + porcentajeEncontradas + "\r\n";
+		var promedioTiempo = timeAcum / cantidadCorridas;
+		csvContent += initialPopulation + ","+cicloMenor+","+cicloMayor+"," + promedioCiclos  + "," + promedioCiclosOK + "," + porcentajeEncontradas + ","+ tiempoMenor+","+ tiempoMayor+ "," + promedioTiempo + "\r\n";
 	}
 	generarCsv(csvContent);
 }
@@ -33,25 +50,40 @@ function testCantLuciernagas(){
 function testAtract(){
 	var cantidadCorridas = 100;
 	var csvContent = "data:text/csv;charset=utf-8,";
-	csvContent += "Atractividad,Promedio Ciclos,PromedioOK,Porcentaje soluciones"+"\r\n";
+	csvContent += "Atractividad,Ciclo Menor,Ciclo Mayor,Promedio Ciclos,PromedioOK,Porcentaje soluciones,Tiempo Menor,Tiempo mayor,Promedio Tiempo"+"\r\n";
 	attractiveness = 0.1;
 	while(attractiveness<=0.9){
 		console.log(attractiveness);
 		var ciclosOK = 0;
 		var ciclos = 0;
 		var soluciones = 0;
+		var timeAcum = 0;
+		var tiempoMayor = 0;
+		var tiempoMenor = 9999999999999;
+		var cicloMenor=MAX_GEN;
+		var cicloMayor=0;
 		for (var i = 0; i < cantidadCorridas; i++) {
+			var start = new Date().getTime();
 			var cicloFin = FA2(generarLuciernagas());
 			ciclos += cicloFin;
 			if(cicloFin != MAX_GEN){
+				var end = new Date().getTime();
+				var time = (end - start);
+				timeAcum += time;
 				ciclosOK += cicloFin;
 				soluciones++;
+				if(time<tiempoMenor) tiempoMenor=time;
+				if(time>tiempoMayor) tiempoMayor=time;
+				if(cicloFin<cicloMenor) cicloMenor=cicloFin;
+				if(cicloFin>cicloMayor) cicloMayor=cicloFin;
+
 			}
 		};
 		var promedioCiclosOK = ciclosOK / soluciones;
 		var promedioCiclos = ciclos / cantidadCorridas;
 		var porcentajeEncontradas = soluciones / cantidadCorridas * 100;
-		csvContent += attractiveness + "," + promedioCiclos  + "," + promedioCiclosOK + "," + porcentajeEncontradas + "\r\n";
+		var promedioTiempo = timeAcum / cantidadCorridas;
+		csvContent += attractiveness + ","+cicloMenor+","+cicloMayor+"," + promedioCiclos  + "," + promedioCiclosOK + "," + porcentajeEncontradas + ","+ tiempoMenor+","+ tiempoMayor+ "," + promedioTiempo + "\r\n";
 		attractiveness += 0.1;
 	}
 	generarCsv(csvContent);
@@ -66,12 +98,26 @@ function testRandomness(){
 		var ciclosOK = 0;
 		var ciclos = 0;
 		var soluciones = 0;
+		var timeAcum = 0;
+		var tiempoMayor = 0;
+		var tiempoMenor = 9999999999999;
+		var cicloMenor=MAX_GEN;
+		var cicloMayor=0;
 		for (var i = 0; i < cantidadCorridas; i++) {
+			var start = new Date().getTime();
 			var cicloFin = FA2(generarLuciernagas());
 			ciclos += cicloFin;
 			if(cicloFin != MAX_GEN){
+				var end = new Date().getTime();
+				var time = (end - start);
+				timeAcum += time;
 				ciclosOK += cicloFin;
 				soluciones++;
+				if(time<tiempoMenor) tiempoMenor=time;
+				if(time>tiempoMayor) tiempoMayor=time;
+				if(cicloFin<cicloMenor) cicloMenor=cicloFin;
+				if(cicloFin>cicloMayor) cicloMayor=cicloFin;
+
 			}
 		};
 		var promedioCiclosOK = ciclosOK / soluciones;
@@ -127,3 +173,4 @@ function FA2(luciernagas){
 	}
 	return k;
 }
+
