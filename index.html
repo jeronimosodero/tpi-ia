@@ -114,7 +114,7 @@
 <form>
       <div class="row">
     <div class="input-field col s12">
-      <input value="8" id="initialPopulation" type="number" class="validate">
+      <input value="8" id="initialPopulation" type="number" class="validate" min="2">
       <label class="active" for="initialPopulation">Poblacion Inicial</label>
     </div>
     <div class="input-field col s12">
@@ -122,12 +122,16 @@
       <label class="active" for="maxgen">Máximo de Ciclos</label>
     </div>
     <div class="input-field col s12">
-      <input value="0.5" id="attrac" type="number" class="validate" step="0.1">
+      <input value="0.5" id="attrac" type="number" class="validate" step="0.1" min="0" max="1">
       <label class="active" for="attrac">Atractividad</label>
     </div>   
     <div class="input-field col s12">
-      <input value="1" id="ale" type="number" class="validate">
+      <input value="1" id="ale" type="number" class="validate" min="0">
       <label class="active" for="ale">Aleatoreidad</label>
+    </div>
+    <div class="input-field col s12">
+      <input value="50" id="mpml" type="number" class="validate">
+      <label class="active" for="mpml">Maxima permanencia en maximo local</label>
     </div>
     <div class="input-field col s12">
       <input value="50" id="fvm" type="number" class="validate" step="10">

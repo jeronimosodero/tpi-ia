@@ -1,8 +1,13 @@
- 
+ $(document).ready(function(){
 
-  $(document).ready(function(){
+    $('.modal-trigger').leanModal();
+    $('#initialPopulation').val(initialPopulation);
+    $('#maxgen').val(MAX_GEN);
+    $('#attrac').val(attractiveness);
+    $('#ale').val(randomness);
+    $('#fvm').val(fvm);
+    $('#mpml').val(mpml);
 
-    $('.modal-trigger').leanModal();	
 
   });
 
@@ -305,8 +310,7 @@ function scrollDown(element){
 
   	var previousHtml = previousName + '<sub>['+ index + ']</sub>';
  	var newHtml = newName + '<sub>['+ index + ']</sub>';
- 	console.log("previousHtml: ",previousHtml);
- 	console.log("newHtml: ",newHtml);
+
 
  	$('span').html(function(index,oldhtml){
  		if (oldhtml==previousHtml) return newHtml;
