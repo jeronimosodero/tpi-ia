@@ -27,10 +27,13 @@ function run(){
 	clrscr();
 	agregarPad();
 
+
+
 	if (checkInput()) {
 		var luciernagas = generarLuciernagas();
 		modalsDisplay();
 		mostrarLuciernagas(FA(luciernagas),'#pobfin',true);
+
 		scrollDown('#poblacionfinal');
 	}
 	$('.modal-trigger').leanModal();
@@ -133,12 +136,20 @@ function FA(luciernagas){
 				}else if(i != j && equals(luciernagas[i],luciernagas[j])){
 					random(luciernagas,randomness,j);
 				}
-				maxLoc(cont,errores,4,luciernagas);
+				maxLoc(cont,errores,4,luciernagas,k);
 			}
 		}
 		k++;
 		//console.log("ciclo:", k);
 	}
+
+
+
+	if (checkErrors(luciernagas)) Materialize.toast('No se encontro solución', 2000)
+		else Materialize.toast('Se encontró la solución', 2000);
+
+	addSummary(k,checkSolutions(luciernagas), luciernagas);
+
 	return luciernagas;
 }
 
@@ -207,3 +218,93 @@ function random(luciernagas,heter,j){
 		}
 	};
 }
+
+
+function fuerzaBruta(){
+
+	var operador1 = readOp1(false);
+	var operador2 = readOp2(false);
+	var resultado = readRes(false);
+
+	var unicos = [];
+
+	var suma = "";
+
+	for (var i = 0; i < resultado.length; i++) {
+		
+		if (i < operador1.length) suma += operador1[i];
+		if (i < operador2.length) suma += operador2[i];
+		suma += resultado[i];
+	};
+
+	suma = suma.split("").reverse().join("");
+
+	for (i = 0;i < suma.length; i++) {
+		if(unicos.indexOf(suma[i])==-1){
+			unicos.push(suma[i]);
+		}
+	}
+
+	
+
+
+		var luc = {};
+		for(i = 0; i < unicos.length;i++){
+			var nro = Math.round(Math.random()*9);
+			while(exists(luc,nro)){
+				nro = Math.round(Math.random()*9);
+			}
+			luc[unicos[i]] = nro;
+		}
+		
+
+
+var min='';
+var max='';
+
+
+	for (var i = 0; i <= (unicos.length-1); i++) min+=i;
+	
+	for (var i = 9; i > (9-unicos.length); i--) max+=i;
+	
+
+	var resprogress=0;
+
+
+	for (var c = 123456789; c <= 200000000; c++) {
+
+		//var progress = c.toString().substring(0,2);
+		//if (resprogress!=progress)console.log(progress+"%");
+		//resprogress=progress;
+		
+
+		var positions = [];
+		for (var i = 0; i < 10; i++) {
+			positions.unshift(Math.floor(c/Math.pow(10,i))%10)
+		};
+		
+		var band = true;
+
+		for (var i = 0; i < positions.length; i++) { 
+			for (var j = 0; j < positions.length; j++) { ;
+				if (i!=j && positions[i]==positions[j]) band=false				
+			}
+		}
+		luciernagas = [];
+
+		if (band) {
+			var luc= {};
+			for (var i = 0; i < unicos.length; i++) {
+				luc[unicos[i]]=positions[i]
+			};
+			console.log(c);
+			//console.log(luc,error(luc));
+			//if (error(luc)==0) luciernagas.push(luc);
+
+		};
+		
+	};
+
+	
+}
+

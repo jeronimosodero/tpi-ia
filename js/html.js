@@ -109,7 +109,7 @@ function checkIndex(luciernagas,luc){
 
 function agregarPad(){
 		var html = '<div class="container white-text">\
-      					<h5>Población Final</h5>\
+      					<h5>Configuración Final</h5>\
       					<div class="divider"></div>\
      					<br>\
       					<div class="row" id="pobfin">\
@@ -157,6 +157,19 @@ function appendCiclo(ciclo,container){
 	$('<div/>', {
 			'class':'col s12 l1 rere',
 			//'style': 'text-align: center;margin-top: 50px;',
+			'html': html
+		}).appendTo(container)
+}
+
+function appendSalto(error,container,ciclo){
+		var html = '<div class="card red darken-1 white-text">\
+							<div class="card-content">\
+								<p>En el ciclo <b>'+ciclo+'</b> esta luciernaga permanecio mucho tiempo con error <b>'+error+'</b> y se le fue aplicada un vector aleatorio <b>'+randomness+'</b></p>\
+							</div>\
+					</div>'
+
+	$('<div/>', {
+			'class':'col s12 l12',
 			'html': html
 		}).appendTo(container)
 }
@@ -286,3 +299,52 @@ function scrollDown(element){
          scrollTop: $(element).offset().top
     }, 1000);
  }
+
+ function replaceName(index, previousName, newName){
+ 
+
+  	var previousHtml = previousName + '<sub>['+ index + ']</sub>';
+ 	var newHtml = newName + '<sub>['+ index + ']</sub>';
+ 	console.log("previousHtml: ",previousHtml);
+ 	console.log("newHtml: ",newHtml);
+
+ 	$('span').html(function(index,oldhtml){
+ 		if (oldhtml==previousHtml) return newHtml;
+ 	})
+
+ 	jQuery(":header").html(function(index,oldhtml){
+ 		if (oldhtml==('Historia de '+previousHtml)) return 'Historia de '+ newHtml;
+ 	})
+
+ }
+
+function checkSolutions(luciernagas){
+	var soluciones =[];
+	
+	for (var i = 0; i < luciernagas.length; i++) if (error(luciernagas[i])==0) soluciones.push(i);
+	
+	return soluciones;
+}
+
+
+function addSummary(ciclo, soluciones){
+
+		var solucioneshtml = '';
+
+		for (var i = 0; i < soluciones.length; i++) {
+			solucioneshtml+= nameLuciernagas[soluciones[i]] + '<sub>['+soluciones[i]+']</sub> '
+		};
+
+		var html = '<div class="card optimus" style="padding-bottom: 20px;">\
+							<div class="card-content">\
+								<div class="col s6"><p>Soluciones: <b>'+solucioneshtml+'</b></p></div>\
+								<div class="col s6"><p>Ciclos requeridos: <b>'+ciclo+'</b></p></div>\
+							</div>\
+					</div>'
+
+	$('<div/>', {
+			'class':'col s12 l12',
+			'html': html
+		}).appendTo('#pobfin')
+
+}

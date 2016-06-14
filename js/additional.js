@@ -39,19 +39,22 @@ function exists(luciernaga, nro) {
 }
 
 function checkErrors(luciernagas){
-	var names = ['Nelson','Jero','Matias'];
+	var names = ['Nelson','Jeronimo','Matias'];
 	var select = Math.round(Math.random()*2);
 	for (var i = 0; i < luciernagas.length; i++) {
 		if (error(luciernagas[i])==0) {
+			replaceName(i,nameLuciernagas[i],names[select]);
 			nameLuciernagas[i]=names[select];
+			
 			return false}
 	};
 return true
 }
 
-function maxLoc(cont,errores,max,luciernagas){
+function maxLoc(cont,errores,max,luciernagas,ciclo){
 	for (var i = 0; i < cont.length; i++) {
 		if (cont[i]>max) {
+			appendSalto(errores[i],'#modalrow'+i,ciclo);
 			cont[i]=0;
 			random(luciernagas,randomness,i);
 			errores[i]=error(luciernagas[i]);
