@@ -169,7 +169,7 @@ function appendCiclo(ciclo,container){
 function appendSalto(error,container,ciclo){
 		var html = '<div class="card red darken-1 white-text">\
 							<div class="card-content">\
-								<p>En el ciclo <b>'+ciclo+'</b> esta luciernaga permanecio mucho tiempo con error <b>'+error+'</b> y se le fue aplicada un vector aleatorio <b>'+randomness+'</b></p>\
+								<p>En el ciclo <b>'+ciclo+'</b> esta luciernaga permanecio '+mpml+' ciclos con error <b>'+error+'</b> y se le fue aplicada un vector aleatorio <b>'+randomness+'</b></p>\
 							</div>\
 					</div>'
 
