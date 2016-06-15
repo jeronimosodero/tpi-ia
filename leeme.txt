@@ -1,0 +1,18 @@
+Para ejecutar la aplicación abrir el index.html con un navegador (fue probado con Google Chrome).
+
+
+En el js/main.js se encuentran las funciones mas importantes de este algoritmo.
+En el js/additional.js se encuentran las funciones soportes necesarias para las funciones principales.
+
+
+La IDE utilizada fue: Sublime Text 2.
+Las librerias usadas fueron: 
+1) Materialize para las interfaces. 
+2) JQuery.
+3) Chance.js para los nombres aleatorios.
+
+
+Los lenguajes de programación utilizados fueron:
+1) Javascript.
+2) HTML.
+3) CSS. 
