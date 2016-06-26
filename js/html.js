@@ -8,7 +8,7 @@
     $('#fvm').val(fvm);
     $('#mpml').val(mpml);
 
-
+$('.tooltipped').tooltip({delay: 50});
   });
 
 function mostrarLuciernagas(luciernagas, container, history){
@@ -17,12 +17,11 @@ function mostrarLuciernagas(luciernagas, container, history){
 		if (error(luciernagas[i])==0) {errore=true} else {errore=false;}
 		mostrarLuciernaga(luciernagas[i],container, i, history, errore)
 	}
+	$('.tooltipped').tooltip({delay: 50});
 
 }
 
 function mostrarLuciernaga(luc, container, i, history, color){
-
-
 
 	var op1 = readOp1(true);
 	var op2 = readOp2(true);
@@ -74,7 +73,7 @@ function mostrarLuciernaga(luc, container, i, history, color){
 
 		var moo = '';
 
-		if (history) moo = '<a class="modal-trigger '+optimus+'" href="#modal'+i+'" style="float: right;"><i class="tiny material-icons">book</i></a>'
+		if (history) moo = '<a class="modal-trigger '+optimus+' tooltipped" data-position="top" data-delay="50" data-tooltip="Historia" href="#modal'+i+'" style="float: right;"><i class="tiny material-icons">book</i></a>'
 
 		var html = '<div class="col l3 s12 m6">\
 						<div class="card '+optimus+'">\
@@ -114,9 +113,6 @@ function checkIndex(luciernagas,luc){
 
 function agregarPad(){
 		var html = '<div class="container white-text">\
-      					<h5>Configuración Final</h5>\
-      					<div class="divider"></div>\
-     					<br>\
       					<div class="row" id="pobfin">\
       					</div>\
     				</div>';
@@ -137,7 +133,6 @@ function appendTrending(trending,container){
 
 	$('<div/>', {
 			'class':'col s12 l1 rere',
-			//'style': 'text-align: center;margin-top: 50px;',
 			'html': html
 		}).appendTo(container)
 }
@@ -149,7 +144,6 @@ function appendShuffle(shuffle,container){
 
 	$('<div/>', {
 			'class':'col s12 l1 rere',
-			//'style': 'text-align: center;margin-top: 50px;',
 			'html': html
 		}).appendTo(container)
 }
@@ -161,7 +155,6 @@ function appendCiclo(ciclo,container){
 
 	$('<div/>', {
 			'class':'col s12 l1 rere',
-			//'style': 'text-align: center;margin-top: 50px;',
 			'html': html
 		}).appendTo(container)
 }
@@ -169,7 +162,7 @@ function appendCiclo(ciclo,container){
 function appendSalto(error,container,ciclo){
 		var html = '<div class="card red darken-1 white-text">\
 							<div class="card-content">\
-								<p>En el ciclo <b>'+ciclo+'</b> esta luciernaga permanecio '+mpml+' ciclos con error <b>'+error+'</b> y se le fue aplicada un vector aleatorio <b>'+randomness+'</b></p>\
+								<p>En el ciclo <b>'+ciclo+'</b> esta luciernaga permaneció '+mpml+' ciclos con error <b>'+error+'</b> y se le fue aplicada un vector aleatorio <b>'+randomness+'</b></p>\
 							</div>\
 					</div>'
 
@@ -228,12 +221,10 @@ function modalsDisplay(){
 
 function changeOperator(){
 
-	if (document.getElementById("operator").getElementsByTagName("i")[0].innerHTML=="add"){
-		document.getElementById("operator").getElementsByTagName("i")[0].innerHTML="remove";
-	} else if (document.getElementById("operator").getElementsByTagName("i")[0].innerHTML=="remove"){
-		document.getElementById("operator").getElementsByTagName("i")[0].innerHTML="add";
-	}
+	var operator = $('#operator i');
 
+	if (operator.html()=="add") operator.html("remove")
+	else if (operator.html()=="remove") operator.html("add");
 
 }
 
@@ -247,6 +238,8 @@ function checkInput(){
 
 	var unicos = [];
 	var suma = operador1 + operador2 + resultado;
+
+	var operator = $('#operator i').html();
 
 
 	for (i = 0;i < suma.length; i++) {
@@ -262,24 +255,10 @@ function checkInput(){
 
 	for (var i = 0; i < unicos.length; i++) {
 		if (isNaN(unicos[i]) == false) {
-			Materialize.toast('Los operadores no puede contener digitos.', 4000);
+			Materialize.toast('Los operadores no puede contener dígitos.', 4000);
 			return false;
 		}
 	};
-
-	if (operador1.length > operador2.length) max = operador1
-		else max = operador2;
-
-
-	if (max.length > resultado.length){
-		Materialize.toast('El resultado no tiene los suficientes caracteres', 4000);
-		return false;
-	}
-
-	if (resultado.length > max.length+1){
-		Materialize.toast('El resultado es muy largo', 4000);
-		return false;
-	}
 
 	if (resultado.length == 0){
 		Materialize.toast('El resultado esta vacío', 4000);
@@ -295,6 +274,23 @@ function checkInput(){
 		Materialize.toast('El segundo operador es vacío', 4000);
 		return false;
 	}
+
+	if (operador1.length > operador2.length) max = operador1
+		else max = operador2;
+
+ 	if (operator == "add"){
+		if (max.length > resultado.length){
+			Materialize.toast('El resultado no tiene los suficientes caracteres', 4000);
+			return false;
+		}
+	}
+
+	if (resultado.length > max.length+1){
+		Materialize.toast('El resultado es muy largo', 4000);
+		return false;
+	}
+
+
 
 	return true;
 }
@@ -341,7 +337,7 @@ function addSummary(ciclo, soluciones){
 
 		var html = '<div class="card optimus" style="padding-bottom: 20px;">\
 							<div class="card-content">\
-								<div class="col s6"><p>Soluciones: <b>'+solucioneshtml+'</b></p></div>\
+								<div class="col s6"><p>Solución/es: <b>'+solucioneshtml+'</b></p></div>\
 								<div class="col s6"><p>Ciclos requeridos: <b>'+ciclo+'</b></p></div>\
 							</div>\
 					</div>'

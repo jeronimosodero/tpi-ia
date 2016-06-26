@@ -25,9 +25,6 @@
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
   </nav>
-  <div class="progress" style="margin-top: 0px;">
-      <div id="preloader" class="determinate" ></div>
-  </div>
   <br>
 
   <div class="container">
@@ -37,9 +34,13 @@
       <div class="col s12 l8 m6">
         <div class="card blue-grey darken-1">
           <div class="card-content white-text">
-            <span class="card-title">Abstract</span>
+            <span class="card-title">Instructivo</span>
             <br>
-            <p>El presente trabajo tiene como finalidad mostrar la implementación de un algoritmo de enjambre, en este caso el algoritmo Firefly, para la resolución de proble-mas criptoaritméticos, haciendo un análisis de las simulaciones realizadas qué dejen en claro su comportamiento.</p>
+            <p>La sección Problema permite la entrada del primer, segundo operando y resultado del problema criptoaritmético a resolver. Para cambiar el sentido de la operación, hacer click sobre el signo de la misma. <br><br>
+              Tener en cuenta la longitud de los operandos y la cantidad de caracteres total para la validez del problema.
+              Se pueden configurar los parámetros del Algoritmo haciendo click en <i class="tiny material-icons">settings</i>. <br><br>
+              Una vez finalizado el Algoritmo la configuración final de las luciernagas es presentada en pantalla junto con la solución resaltada (si es hallada). La historia de los movimientos de cada luciernaga puede ser accedida haciendo click en <i class="tiny material-icons">book</i>.
+            </p>
             </div>
           </div>
         </div>
@@ -53,7 +54,7 @@
 
             <div class="card-content white-text">
               <span class="card-title">Problema</span>
-              <a class="modal-trigger" href="#settings" style="float: right;color: white"><i class="tiny material-icons">settings</i></a>
+              <a class="modal-trigger tooltipped" data-position="right" data-delay="50" data-tooltip="Configuración" href="#settings" style="float: right;color: white"><i class="tiny material-icons">settings</i></a>
               <br>
               <div class="input-field ">
                 <i class="material-icons prefix"></i>
@@ -62,7 +63,7 @@
               </div>
               
               <div class="input-field">
-                 <a id="operator" class="btn-floating btn-small waves-effect waves-light white prefix" onclick="changeOperator()"><i class="material-icons">add</i></a>
+                 <a id="operator" class="btn-floating btn-small waves-effect waves-light white prefix tooltipped" data-position="left" data-delay="50" data-tooltip="Cambiar operador" onclick="changeOperator()"><i class="material-icons">add</i></a>
                 
                 <input id="operador2" value="MORE" type="text" class="validate" style='text-transform:uppercase; border-bottom: 1px solid white;'>
                 <label for="operador2">Segundo Operador</label>
@@ -104,26 +105,34 @@
 <form>
       <div class="row">
     <div class="input-field col s12">
+       
       <input value="8" id="initialPopulation" type="number" class="validate" min="2">
       <label class="active" for="initialPopulation">Poblacion Inicial</label>
+
     </div>
+    
     <div class="input-field col s12">
+   
       <input value="1000" id="maxgen" type="number" class="validate">
       <label class="active" for="maxgen">Máximo de Ciclos</label>
     </div>
     <div class="input-field col s12">
+      
       <input value="0.5" id="attrac" type="number" class="validate" step="0.1" min="0" max="1">
       <label class="active" for="attrac">Atractividad</label>
     </div>   
     <div class="input-field col s12">
+     
       <input value="1" id="ale" type="number" class="validate" min="0">
       <label class="active" for="ale">Aleatoreidad</label>
     </div>
     <div class="input-field col s12">
+      
       <input value="50" id="mpml" type="number" class="validate">
       <label class="active" for="mpml">Maxima permanencia en maximo local</label>
     </div>
     <div class="input-field col s12">
+      
       <input value="50" id="fvm" type="number" class="validate" step="10">
       <label class="active" for="fvm">Frecuencia visualización de movimientos</label>
     </div>
@@ -146,8 +155,8 @@
       <div class="container">
         <div class="row">
           <div class="col l6 s12">
-            <h5 class="white-text"><i class="tiny material-icons">note</i>  Resumen del trabajo</h5>
-            <p class="grey-text text-lighten-4">El presente trabajo tiene la intención de aplicar el algoritmo de enjambre "Firefly" para la resolución de problemas de Criptoaritmetica.</p>
+            <h5 class="white-text"><i class="tiny material-icons">note</i>  Abstract</h5>
+            <p class="grey-text text-lighten-4">El presente trabajo tiene la intención de aplicar el algoritmo de enjambre "Firefly" para la resolución de problemas de Criptoaritmética.</p>
           </div>
           <div class="col l3 s12">
             <h5 class="white-text"><i class="tiny material-icons">group</i>  Integrantes</h5>
@@ -171,7 +180,7 @@
             <p class="white-text">Facultad Regional Resistencia</p>
           </div>
           <div class="col l3 s12">
-            <h5 class="white-text"><i class="tiny material-icons">book</i>  Catedra</h5>
+            <h5 class="white-text"><i class="tiny material-icons">book</i>  Cátedra</h5>
             <p class="white-text">Inteligencia Artificial</p>
           </div>
           <div class="col l5 s12">
