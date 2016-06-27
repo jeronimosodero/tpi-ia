@@ -50,11 +50,15 @@ function generarLuciernagas(){
 
 	var suma = "";
 
-	for (var i = 0; i < resultado.length; i++) {
-		
+	max = operador1.length;
+	if (operador2.length > max) max = operador2.length;
+	if (resultado.length > max) max = resultado.length;
+
+	for (var i = 0; i < max; i++) {		
 		if (i < operador1.length) suma += operador1[i];
 		if (i < operador2.length) suma += operador2[i];
-		suma += resultado[i];
+		if (i < resultado.length) suma += resultado[i];
+		
 	};
 
 	suma = suma.split("").reverse().join("");
