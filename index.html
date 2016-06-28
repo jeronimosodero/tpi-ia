@@ -104,36 +104,28 @@
       <h4>Configuración</h4>
 <form>
       <div class="row">
-    <div class="input-field col s12">
-       
-      <input value="8" id="initialPopulation" type="number" class="validate" min="2">
-      <label class="active" for="initialPopulation">Poblacion Inicial</label>
-
-    </div>
-    
-    <div class="input-field col s12">
-   
-      <input value="1000" id="maxgen" type="number" class="validate">
+    <div class="input-field col s12">       
+      <input class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Cantidad de luciernagas que se van a utilizar para la ejecución del algoritmo" value="8" id="initialPopulation" type="number" class="validate" min="2">
+      <label class="active" for="initialPopulation">Población Inicial</label>
+    </div>    
+    <div class="input-field col s12">   
+      <input class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Cantidad máxima de ciclos que se ejecutara el algoritmo antes de detenerse" value="1000" id="maxgen" type="number" class="validate">
       <label class="active" for="maxgen">Máximo de Ciclos</label>
     </div>
-    <div class="input-field col s12">
-      
-      <input value="0.5" id="attrac" type="number" class="validate" step="0.1" min="0" max="1">
+    <div class="input-field col s12">      
+      <input class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Coeficiente que determina el grado de movimiento entre las luciernagas" value="0.5" id="attrac" type="number" class="validate" step="0.1" min="0" max="1">
       <label class="active" for="attrac">Atractividad</label>
     </div>   
-    <div class="input-field col s12">
-     
-      <input value="1" id="ale" type="number" class="validate" min="0">
+    <div class="input-field col s12">     
+      <input class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Vector de movimiento aleatorio de las luciernagas" value="1" id="ale" type="number" class="validate" min="0">
       <label class="active" for="ale">Aleatoreidad</label>
     </div>
-    <div class="input-field col s12">
-      
-      <input value="50" id="mpml" type="number" class="validate">
+    <div class="input-field col s12">      
+      <input class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Cantidad de ciclos máximo que una luciernaga puede permanecer con el mismo brillo" value="50" id="mpml" type="number" class="validate">
       <label class="active" for="mpml">Maxima permanencia en maximo local</label>
     </div>
-    <div class="input-field col s12">
-      
-      <input value="50" id="fvm" type="number" class="validate" step="10">
+    <div class="input-field col s12">      
+      <input class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Frecuencia con los que los movimientos de las luciernagas son vizualizados en la pestaña Historia" value="50" id="fvm" type="number" class="validate" step="10">
       <label class="active" for="fvm">Frecuencia visualización de movimientos</label>
     </div>
   </div>
