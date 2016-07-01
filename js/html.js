@@ -290,6 +290,10 @@ function checkInput(){
 		return false;
 	}
 
+	if (operador1.length < operador2.length){
+		Materialize.toast('El primer operador es muy corto', 4000);
+		return false;
+	}
 
 
 	return true;
