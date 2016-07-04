@@ -1,41 +1,15 @@
-var nameLuciernagas = [];
-
-function update(){
-	initialPopulation = parseInt($('#initialPopulation').val());
-	MAX_GEN = parseInt($('#maxgen').val());
-	attractiveness = parseFloat($('#attrac').val());	
-	randomness = parseInt($('#ale').val());
-	fvm = parseInt($('#fvm').val());
-	mpml = parseInt($('#mpml').val());
-}
-
-
-function clrscr(){
-	$("#poblacionfinal").remove();
-
-	var container;
-	for (var i = 0; i < initialPopulation; i++) {
-		container = '#modal'+i;
-		$(container).remove();
-	};
-	
-}
-
 function run(){
-
 
 	clrscr();
 	agregarPad();
-
-
 
 	if (checkInput()) {
 		var luciernagas = generarLuciernagas();
 		modalsDisplay();
 		mostrarLuciernagas(FA(luciernagas),'#pobfin',true);
-
 		scrollDown('#poblacionfinal');
 	}
+
 	$('.modal-trigger').leanModal();
 }
 
@@ -140,14 +114,13 @@ function FA(luciernagas){
 				}else if(i != j && equals(luciernagas[i],luciernagas[j])){
 					random(luciernagas,randomness,j);
 				}
-				maxLoc(cont,errores,mpml,luciernagas,k);
+				
 			}
 		}
+		maxLoc(cont,errores,mpml,luciernagas,k);
 		k++;
 		//console.log("ciclo:", k);
 	}
-
-
 
 	if (checkErrors(luciernagas)) Materialize.toast('No se encontro solución', 2000)
 		else Materialize.toast('Se encontró la solución', 2000);
@@ -161,27 +134,27 @@ function acercar(max,luciernagas,i,j){
 	var dist = distanciaManhattan(luciernagas[i],luciernagas[j]);
 	var luc2t;
 	var distmovile;
-	var c=0;
-do {
-	for (var x in luciernagas[j]) {
-		dismovile= distanciaManhattan(luciernagas[i],luciernagas[j]);
-		luc2t = jQuery.extend({}, luciernagas[j]);
+	
+	do {
+		for (var x in luciernagas[j]) {
+			dismovile = distanciaManhattan(luciernagas[i],luciernagas[j]);
+			luc2t = jQuery.extend({}, luciernagas[j]);
 
-		if (luciernagas[j][x] != luciernagas[i][x]) {
-			var resg = luciernagas[j][x];
-			var ind = searchbyNum(luciernagas[j],luciernagas[i][x])
-			luciernagas[j][x]=luciernagas[i][x];
-			if (ind) luciernagas[j][ind] = resg;
-			var newDist = distanciaManhattan(luciernagas[i],luciernagas[j]);
-			if (newDist == (dist-max)) break;
-			if ((newDist >= distmovile) || (newDist < (dist-max))){
-				luciernagas[j] = luc2t;
-				luc2t= null	;
-			} 
+			if (luciernagas[j][x] != luciernagas[i][x]) {
+				var resg = luciernagas[j][x];
+				var ind = searchbyNum(luciernagas[j],luciernagas[i][x])
+				luciernagas[j][x]=luciernagas[i][x];
+				if (ind) luciernagas[j][ind] = resg;
+				var newDist = distanciaManhattan(luciernagas[i],luciernagas[j]);
+				if (newDist == (dist-max)) break;
+				if ((newDist >= distmovile) || (newDist < (dist-max))){
+					luciernagas[j] = luc2t;
+					luc2t= null	;
+				} 
+			}
 		}
-	}
-	max++;
-} while ((dist-distanciaManhattan(luciernagas[i],luciernagas[j]))==0);
+		max++;
+	} while ((dist-distanciaManhattan(luciernagas[i],luciernagas[j]))==0);
 
 	return (dist-distanciaManhattan(luciernagas[i],luciernagas[j]));
 }
@@ -198,11 +171,10 @@ function random(luciernagas,heter,j){
 
 	for (var i = 0; i < iter; i++) {
 		
-		vic1 = Math.trunc(Math.random()*10);
-		
+		vic1 = Math.trunc(Math.random()*10);		
 		numb = getNumbers(luciernagas[j]);
-
 		var index = numb.indexOf(vic1);
+		
 		if (index > -1) {
     		numb.splice(index, 1);
 		}
@@ -219,6 +191,17 @@ function random(luciernagas,heter,j){
 			luciernagas[j][indvic2]=vic1;
 		} else {
 			luciernagas[j][indvic2]=vic1;
+		}
+	};
+}
+
+function maxLoc(cont,errores,max,luciernagas,ciclo){
+	for (var i = 0; i < cont.length; i++) {
+		if (cont[i]>max) {
+			appendSalto(errores[i],'#modalrow'+i,ciclo);
+			cont[i]=0;
+			random(luciernagas,randomness,i);
+			errores[i]=error(luciernagas[i]);
 		}
 	};
 }

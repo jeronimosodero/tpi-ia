@@ -1,3 +1,5 @@
+var nameLuciernagas = [];
+
  $(document).ready(function(){
 
     $('.modal-trigger').leanModal();
@@ -8,7 +10,7 @@
     $('#fvm').val(fvm);
     $('#mpml').val(mpml);
 
-$('.tooltipped').tooltip({delay: 50});
+	$('.tooltipped').tooltip({delay: 50});
   });
 
 function mostrarLuciernagas(luciernagas, container, history){
@@ -173,29 +175,18 @@ function appendSalto(error,container,ciclo){
 }
 
 function showHistory(luc1,luc2,dist,heter,i,j,k,time){
-
 	if (!isNaN(k%fvm) && (k%fvm)==0){
-
-	var container = '#modalrow'+j;
-
-	if (time){
-
-	appendCiclo(k,container);
-
-	mostrarLuciernaga(luc2,container,j, false, false);
-	} else {
-
-	appendTrending(dist,container);
-
-	mostrarLuciernaga(luc1,container,i, false, false);
-
-	appendShuffle(heter,container);
-
-	mostrarLuciernaga(luc2,container,j, false, false);
-
-
-}}
-
+		var container = '#modalrow'+j;
+		if (time){
+			appendCiclo(k,container);
+			mostrarLuciernaga(luc2,container,j, false, false);
+		} else {
+			appendTrending(dist,container);
+			mostrarLuciernaga(luc1,container,i, false, false);
+			appendShuffle(heter,container);
+			mostrarLuciernaga(luc2,container,j, false, false);
+		}
+	}
 }
 
 function modalsDisplay(){
@@ -240,7 +231,6 @@ function checkInput(){
 	var suma = operador1 + operador2 + resultado;
 
 	var operator = $('#operator i').html();
-
 
 	for (i = 0;i < suma.length; i++) {
 		if(unicos.indexOf(suma[i])==-1){
@@ -290,11 +280,16 @@ function checkInput(){
 		return false;
 	}
 
-	if (operador1.length < operador2.length){
-		Materialize.toast('El primer operador es muy corto', 4000);
-		return false;
+	if (operator == "remove"){
+		if (operador1.length < operador2.length){
+			Materialize.toast('El primer operador es muy corto', 4000);
+			return false;
+		}
+		if (resultado.length > max.length){
+			Materialize.toast('El resultado tiene muchos caracteres', 4000);
+			return false;
+		}
 	}
-
 
 	return true;
 }
@@ -305,12 +300,10 @@ function scrollDown(element){
     }, 1000);
  }
 
- function replaceName(index, previousName, newName){
- 
+ function replaceName(index, previousName, newName){ 
 
   	var previousHtml = previousName + '<sub>['+ index + ']</sub>';
  	var newHtml = newName + '<sub>['+ index + ']</sub>';
-
 
  	$('span').html(function(index,oldhtml){
  		if (oldhtml==previousHtml) return newHtml;
@@ -351,4 +344,25 @@ function addSummary(ciclo, soluciones){
 			'html': html
 		}).appendTo('#pobfin')
 
+}
+
+function update(){
+	initialPopulation = parseInt($('#initialPopulation').val());
+	MAX_GEN = parseInt($('#maxgen').val());
+	attractiveness = parseFloat($('#attrac').val());	
+	randomness = parseInt($('#ale').val());
+	fvm = parseInt($('#fvm').val());
+	mpml = parseInt($('#mpml').val());
+}
+
+
+function clrscr(){
+	$("#poblacionfinal").remove();
+
+	var container;
+	for (var i = 0; i < initialPopulation; i++) {
+		container = '#modal'+i;
+		$(container).remove();
+	};
+	
 }
